@@ -10,22 +10,32 @@ function [FBAsol,model_fit] = overlayMultiomicsData(varargin)
 % INPUTS:
 %   model:    A PC-model produced by function pcModel.m or preferably
 %               refined by adjustStoichAndKeff.m
-%   data:     Transcriptome or proteome data in N*1 matrix
+%   data:     Transcriptome or proteome data in M*N matrix
+%               M = length of protein vector
+%               N = number of sets of data. N~=1 is only allowed when
+%                   keffEstimate = true
 %   thres:    Lower threshold for an abundance count to be considered
 %               relevant. Default = 0
-%   waiver:   A N*1 cell contains proteinMets that needs to be 
-%               waivered from fitting. E.g. {'protein_b0001'}. Default = {}
+%   waiver:   A cell array contains proteinMets that needs to be waivered
+%               from fitting. Default = {}
+%               E.g., {'protein_b0001','protein_b0002'}.
 %   varargin: optional parameter value pairs
 %       keffEstimate: If enzymatic rate constants are treated as variables.
 %                     Setting to true will lead to nonconvex QP, which
-%                     gurobi solver must be installed. Default = false
+%                     Gurobi solver must be installed. Default = false
 %       objWeight: Allows the algorithm to minimize weighted sum of 
 %                  proteome fitting. Only works when variableKeff = false. 
 %                  Default = []
 %       rBounds: Allows setting upper and lower bounds for r variables when
 %                variableKeff = true. Default = [0.1,1.9]
 %       variedKeff: M*1 binary vector indicating if each keff can be varied
-%                   or not. Default = []
+%                   or not. Default algorithm automatically decide the
+%                   variability of each keff. Only works when 
+%                   keffEstimate = true
+%       rxnBounds: Allows changing rxn bounds for each set of data
+%                  separately. When applied, all lb and ub are overwritten. 
+%                  Input must be a R*N*2 3D matrix where R is the total 
+%                  number of reactions. Only works when keffEstimate = true
 % 
 % OUTPUTS:
 %   FBAsol: FBA solution structure of best possible transcriptome fitting
