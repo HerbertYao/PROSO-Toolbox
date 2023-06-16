@@ -14,7 +14,7 @@
 % Please make sure the following subjects are completed before proceeding
 % with this tutorial:
 % 
-%   - add ~/OVERLAY/src and ~/OVERLAY/legacy to MATLAB path.
+%   - add ~/OVERLAY/src to MATLAB path.
 %   - Install Cobra Toolbox.
 %   - MATLAB add-ons: Statistics and Machine Learning Toolbox
 %                     Bioinformatics Toolbox
@@ -779,7 +779,7 @@ clear i j k idx model_alt FBAsol_alt;
 % emphasize to promote in-silico modelling to wet lab scientists. 
 % 
 % Of course, the analysis does not stop here. It is up to the user if
-% he/she wants to adopt this way of explanation or taking another route. In
+% you wants to adopt this way of explanation or taking another route. In
 % fact, we are still developing new functions, especially regarding new
 % unbiased polyhedral set exploration tool (currently using FVA) and
 % integrating thermodynamic data to OVERLAY. We are whole-heartedly
