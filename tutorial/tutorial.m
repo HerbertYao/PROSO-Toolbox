@@ -496,7 +496,7 @@ clear i idx ed d ol ol2 QPsol_cv r2 r2_log stat wt X Y;
 %% Debottlenecking
 
 % There is a practical reason as for why this debottlenecking step exists
-% and happens before PC-FVA. 
+% and happens before PC-FVA. Please check the journal paper for explanation
 
 models_db = cell(8,1);
 FBAsols = cell(8,1);
@@ -505,7 +505,7 @@ test = zeros(8,1);
 
 for i = 1:8
     model_alt = models{i};
-    [FBAsols{i},models_db{i},relaxProt,relaxLevel] = proteinDebottleneck(model_alt,50);
+    [FBAsols{i},models_db{i},relaxProt,relaxLevel] = proteinDebottleneck(model_alt,35);
 
     for j = 1:length(relaxProt)
         relaxList(find(strcmp(fullProtein,relaxProt{j})),i) = relaxLevel(j);
