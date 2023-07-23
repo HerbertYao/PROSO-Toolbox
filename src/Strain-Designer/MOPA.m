@@ -1,4 +1,4 @@
-function [FBAsol_mut,matchTable] = MOPA(model,delGene)
+function [MOPAsol,FBAsol_wt,FBAsol_mut,matchTable] = MOPA(model,KOGene)
 
 % Adapted from minimization of metabolic ajustment (MOMA), minimization of
 % proteomic adjustment (MOPA) can find the sub-optimal solution when a cell
@@ -51,19 +51,32 @@ for i = 1:length(proteinExIdx)
 end
 
 % Delete proteins in delGene
-for i = 1:length(delGene)
-    idx = find(strcmp(model.rxns,delGene{i}));
+for i = 1:length(KOGene)
+    idx = find(strcmp(model.rxns,KOGene{i}));
     qp.lb(idx) = 0;
     qp.ub(idx) = 0;
 end
 
 % Solve and return match table
-FBAsol_mut = solveCobraQP(qp);
+MOPAsol = solveCobraQP(qp);
 matchTable = zeros(length(proteinExIdx),2);
 
 for i = 1:length(proteinExIdx)
     matchTable(i,1) = FBAsol.v(proteinExIdx(i));
-    matchTable(i,2) = FBAsol_mut.full(proteinExIdx(i));
+    matchTable(i,2) = MOPAsol.full(proteinExIdx(i));
 end
+
+% Retrive wildtype optimum
+FBAsol_wt = FBAsol;
+
+
+% Tetrive KO strain optimum
+model_mut = model;
+
+for i = 1:length(KOGene)
+    model_mut = changeRxnBounds(model_mut,KOGene{i},0);
+end
+
+FBAsol_mut = optimizeCbModel(model_mut,'max');
 
 end
