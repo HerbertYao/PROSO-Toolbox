@@ -124,7 +124,9 @@ model_test = model_ori;
 model_test.lb(idx) = 0;
 model_test.ub(idx) = 0;
 
-FBAsol = optimizeCbModel(model_test,'max');
+drawSolutionEnvelope(model_test,model_ori.rxns{rxnIdx.biomass},model_ori.rxns{rxnIdx.EX_succ},20,true);
+
+% This is equivalent to the original OptKnock
 
 % =========================================================================
 % 
@@ -212,9 +214,26 @@ fprintf('K = %d+1+1: EX_succ_e = %.2f, mu = %.2f\n',K_init,FBAsol.v(rxnIdx.EX_su
 fprintf('Closed proteins: %s, %s, %s\n',model_pc_ori.rxns{idx(1)},model_pc_ori.rxns{idx(2)},model_pc_ori.rxns{idx(3)});
 drawSolutionEnvelope(models_sol{3},model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},20,true);
 
+% And then K = 1+1+1+1: 
+
+model_pcok_alt = changeNumKO(model_pcok,K_init+3);
+model_pcok_alt.ub(yIdx(idx)) = 0;
+PCOKsol = gurobi(model_pcok_alt,param);
+
+idx = find(~PCOKsol.x(find(startsWith(model_pcok_alt.varnames,'y_'))));
+models_sol{4} = model_pc_ori;
+models_sol{4}.lb(idx) = 0;
+models_sol{4}.ub(idx) = 0;
+
+FBAsol = optimizeCbModel(models_sol{4},'max');
+fprintf('K = %d+1+1+1: EX_succ_e = %.2f, mu = %.2f\n',K_init,FBAsol.v(rxnIdx.EX_succ),FBAsol.v(rxnIdx.biomass));
+fprintf('Closed proteins: %s, %s, %s, %s\n',...
+    model_pc_ori.rxns{idx(1)},model_pc_ori.rxns{idx(2)},model_pc_ori.rxns{idx(3)},model_pc_ori.rxns{idx(4)});
+drawSolutionEnvelope(models_sol{4},model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},20,true);
+
 % As you can see, we could keep stacking up with minor computational effort
 % and achieve much better growth-coupling strain. 
-% If we try to solve K = 3 from the beginning, it will cost more than 100x
+% If we try to solve K = 4 from the beginning, it will cost more than 100x
 % resources, although it can guarantee to reach a global optima, of which
 % in this case we don't neccesarily need to achieve anyway.
 
@@ -230,7 +249,7 @@ drawSolutionEnvelope(models_sol{3},model_pc_ori.rxns{rxnIdx.biomass},model_pc_or
 % Let's use the PC-OptKnock K = 1+1+1 result as an example, note that these
 % are the knockouts from that tutorial section:
 
-KOProteins = {'EX_protein_Q0250','EX_protein_YBR196C','EX_protein_YKL029C'};
+KOProteins = {'EX_protein_YPR001W','EX_protein_Q0250','EX_protein_YBR196C','EX_protein_YKL029C'};
 
 proteinExIdx = find(startsWith(model_pc_ori.rxns,'EX_protein_'));
 metRxnIdx = 1:1577;
@@ -246,7 +265,7 @@ metRxnIdx = 1:1577;
 % re-allocated uniformly between each step, but the metabolism change 
 % usually appear non-uniformal. 
 
-FBAsols = proteinTween(models_sol{3},MOPAsol,'BIOMASS_SC5_notrace',10);
+FBAsols = proteinTween(models_sol{4},MOPAsol,'BIOMASS_SC5_notrace',20);
 
 % The solution is too high in dimension to visualize, but we can plot the 
 % manifold after PCA. Note that PCA need to be done for metabolism and
@@ -262,9 +281,9 @@ figure;
 subplot(2,1,1);
 hold on;
 plot(sc_m(2:end,1),sc_m(2:end,2),'o-');
-plot(sc_m(1,1),sc_m(1,2),'*');
-plot(sc_m(end,1),sc_m(end,2),'*');
-plot(sc_m(2,1),sc_m(2,2),'*');
+plot(sc_m(1,1),sc_m(1,2),'*','MarkerSize',10);
+plot(sc_m(end,1),sc_m(end,2),'*','MarkerSize',10);
+plot(sc_m(2,1),sc_m(2,2),'*','MarkerSize',10);
 legend({'migrating route','wildtype optimum point','knockout strain optimum point','MOPA point'});
 title('Metabolism');
 xlabel(['PC 1: ',num2str(exp_m(1)),'%']);
@@ -273,9 +292,9 @@ ylabel(['PC 2: ',num2str(exp_m(2)),'%']);
 subplot(2,1,2);
 hold on;
 plot(sc_p(2:end,1),sc_p(2:end,2),'o-');
-plot(sc_p(1,1),sc_p(1,2),'*');
-plot(sc_p(end,1),sc_p(end,2),'*');
-plot(sc_p(2,1),sc_p(2,2),'*');
+plot(sc_p(1,1),sc_p(1,2),'*','MarkerSize',10);
+plot(sc_p(end,1),sc_p(end,2),'*','MarkerSize',10);
+plot(sc_p(2,1),sc_p(2,2),'*','MarkerSize',10);
 legend({'migrating route','wildtype optimum point','knockout strain optimum point','MOPA point'});
 title('Proteome');
 xlabel(['PC 1: ',num2str(exp_p(1)),'%']);
