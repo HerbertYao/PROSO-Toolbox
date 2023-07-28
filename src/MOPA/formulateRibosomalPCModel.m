@@ -1,5 +1,7 @@
 function model_ribo = formulateRibosomalPCModel(model,RibosomeBudget)
 
+% 
+
 % Format for ribosomal PC-model:
 % 
 %   New Mets LB_protein_b0001 and UB_protein_b0001:
