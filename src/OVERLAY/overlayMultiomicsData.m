@@ -1,13 +1,14 @@
 function [FBAsol,model_fit] = overlayMultiomicsData(varargin)
-
-% A function that find a solution which fits a transcriptome count matrix
-% as closely as possible. Reaction constraints have to be set up prior to
-% using this function (such as minimal growth rate or production)
+% Finds a sol which fits a given transcriptome as closely as possible. 
+% Reaction constraints have to be set up prior to using this function (such
+% as minimal growth rate or production).
 % 
 % USAGE:
+% 
 %   FBAsol = overlayMultiomicsData(model_pc,count,5,[0.1,1000]);
 % 
 % INPUTS:
+% 
 %   model:    A PC-model produced by function pcModel.m or preferably
 %               refined by adjustStoichAndKeff.m
 %   data:     Transcriptome or proteome data in M*N matrix
@@ -38,7 +39,9 @@ function [FBAsol,model_fit] = overlayMultiomicsData(varargin)
 %                  number of reactions. Only works when keffEstimate = true
 % 
 % OUTPUTS:
+% 
 %   FBAsol: FBA solution structure of best possible transcriptome fitting
+% 
 
 %% Parser
 p = inputParser;

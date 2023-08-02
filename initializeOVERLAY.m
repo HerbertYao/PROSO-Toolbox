@@ -1,6 +1,6 @@
 function initializeOVERLAY()
 
-% Initialization and set up
+% Initialization and set up OVERLAY Toolbox
 
 fprintf('============================\n');
 fprintf('   OVERLAY Toolbox v1.0.1   \n');
@@ -22,13 +22,15 @@ lastwarn('','');
 pth = erase(which('initializeOVERLAY.m'),'initializeOVERLAY.m');
 
 addpath(pth);
-addpath([pth,'src']);
-addpath([pth,'src/MOPA']);
-addpath([pth,'src/OVERLAY']);
-addpath([pth,'src/PC-OptKnock']);
+addpath([pth,'src/']);
+addpath([pth,'src/PC-FBA/']);
+addpath([pth,'src/MOPA/']);
+addpath([pth,'src/OVERLAY/']);
+addpath([pth,'src/PC-OptKnock/']);
+addpath([pth,'src/Utilities/']);
 
 if ~isempty(lastwarn())
-    error('Incomplete OVERLAY Toolbox');
+    error('OVERLAY Toolbox integrity problem');
 end
 
 end

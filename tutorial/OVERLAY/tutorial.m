@@ -14,7 +14,7 @@
 % Please make sure the following subjects are completed before proceeding
 % with this tutorial:
 % 
-%   - add ~/OVERLAY/src to MATLAB path.
+%   - Confirm the integrity of OVERLAY Toolbox
 %   - Install Cobra Toolbox.
 %   - MATLAB add-ons: Statistics and Machine Learning Toolbox
 %                     Bioinformatics Toolbox
@@ -27,6 +27,7 @@
 % Don't forget to take advantage of surfNet function to browse the model.
 
 initCobraToolbox(false);
+initializeOVERLAY();
 changeCobraSolver('gurobi','all',1);
 clc;
 

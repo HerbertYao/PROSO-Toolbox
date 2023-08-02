@@ -3,7 +3,7 @@ function [v1,v2] = drawSolutionEnvelope(model,rxnId1,rxnId2,NSteps,drawFlag,rxnW
 % 
 % USAGE:
 % 
-%   model_ribo = proteinTween(model_pc,10);
+%   drawSolutionEnvelope(model_pc,'BIOMASS_SC5_notrace','EX_succ_e',20,true);
 % 
 % INPUTS:
 % 

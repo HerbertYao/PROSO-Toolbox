@@ -1,5 +1,4 @@
 function model_adj = adjustStoichAndKeff(model,C_matrix,K_matrix)
-
 % A function that modify PC-model based on C and Keff matrix provided
 % 
 % USAGE:

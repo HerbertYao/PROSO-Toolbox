@@ -1,5 +1,4 @@
 function K_matrix_new = estimateKeffFromMW(C_matrix,K_matrix,proteinMW)
-
 % Estimating rate constant of enzymes using its molar weight
 % Equation: Keff_cplx_i = Keff_avg * (MW_cplx_i / MW_avg)^0.75
 % 

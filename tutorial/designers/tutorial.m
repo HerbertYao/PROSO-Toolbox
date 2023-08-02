@@ -4,6 +4,7 @@
 % OVERLAY/src/Strain-Designer as well as the concepts behind algorithms
 
 initCobraToolbox(false);
+initializeOVERLAY();
 changeCobraSolver('gurobi','all',1);
 clc;
 
@@ -86,7 +87,7 @@ end
 % (PCBool = false). 
 
 if ~exist('model_ok','var')
-    [model_ok,param] = formulatePCOptKnock(model_ori,1,0.05,true,false);
+    [model_ok,param] = formulatePCOptKnock(model_ori,1,0.05,false);
 end
 
 % Let's inspect the MILP model's structure:
@@ -137,7 +138,7 @@ drawSolutionEnvelope(model_test,model_ori.rxns{rxnIdx.biomass},model_ori.rxns{rx
 % MILP struct for the regular OptKnock. 
 
 if ~exist('model_pcok','var')
-    [model_pcok,param] = formulatePCOptKnock(model_pc_ori,1,0.05,true,true);
+    [model_pcok,param] = formulatePCOptKnock(model_pc_ori,1,0.05,true);
 end
 
 yIdx = find(startsWith(model_pcok.varnames,'y_')); % binary var index
@@ -324,6 +325,8 @@ ylabel('Proteome PC 1');
 zlabel('Succinate Production Rate');
 % set(gca,'Xscale','log');
 
+%% PC-Dynamic FBA
+
 %% minimalGenome
 
 % The minimal genome is an interesting concept in synthetic biology: by
@@ -342,4 +345,6 @@ zlabel('Succinate Production Rate');
 % Let's use the wildtype S. cerevisiae as an example. We want to reduce its
 % genome size while preserving the ability to produce succinate and grow to
 % a certain degree. 
+
+% TODO
 

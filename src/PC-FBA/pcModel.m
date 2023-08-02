@@ -1,12 +1,15 @@
 function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM] = pcModel(model,fasta,maxWeightFrac)
 
-% (MAIN) A function that produce a proteomically constrainted m-model from 
-% a common m-model and protein sequence data. 
+% (MAIN) Construct a PC-model from M-model
+% A function that produce a protein constrainted M-model from a base 
+% M-model and protein sequence data. 
 % 
 % USAGE:
+% 
 %   new_model = proteinConstraintModel(model,'Paeruginosa.fasta',550);
 % 
 % INPUTS:
+% 
 %   model: A functional COBRA model struct with the field 'genes'
 %   fasta: The file name of a proteome fasta file containing geneID 
 %          (same set of ID as model.genes) as header and respective protein 
@@ -16,6 +19,7 @@ function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM
 %          fasta. The modelling accuracy will be compromised.
 % 
 % OPTIONAL INPUTS:
+% 
 %   maxWeightFrac: A double denotes the maximum weight fraction of total
 %                  protein components, in mg/gDW. Default = 550mg/gDW
 %   keff_refTable: A n*2 cell array with enzyme ID in the first column and
@@ -24,6 +28,7 @@ function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM
 %                  (NOT YET FINISHED)
 % 
 % OUTPUTS:
+% 
 %   constraintedModel: A m-model with proteomic constraint
 %   fullProtein:       A full list of proteins added to model.mets
 %   fullEnzyme:        A full list of enzymes added to model.mets
@@ -32,10 +37,12 @@ function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM
 %   fullProteinMM:     Molar mass of each protein in fullProtein
 % 
 % REQUIREMENTS:
+% 
 %   MATLAB with Bioinformatics and Deep Learning Toolbox installed
 %   Configured CobraToolbox with at least one capable solver
 % 
 % Important Note:
+% 
 %   New_model.mets will contain all proteins and enzymes (protein
 %   complexes). Each protein and enzyme will have an exchange rxn and a
 %   enzyme formation rxn. Fluxes of these reactions are not real flux, but
