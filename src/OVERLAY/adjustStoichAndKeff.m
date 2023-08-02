@@ -1,11 +1,13 @@
 function model_adj = adjustStoichAndKeff(model,C_matrix,K_matrix)
 
-% A function that modify PC model based on C and Keff matrix provided
+% A function that modify PC-model based on C and Keff matrix provided
 % 
 % USAGE:
-%   model_adj = proteinConstraintModel(model,C_matrix,K_matrix);
+% 
+%   model_adj = adjustStoichAndKeff(model,C_matrix,K_matrix);
 % 
 % INPUTS:
+% 
 %   model:    A PC model built from the function 'pcModel.m'
 %   C_matrix: Denotes stoich relationship between protein and cplx, must be
 %             the same dimension as C_matrix output from 'pcModel.m'
@@ -13,7 +15,9 @@ function model_adj = adjustStoichAndKeff(model,C_matrix,K_matrix)
 %             same demension as K_matrix output from 'pcModel.m'
 % 
 % OUTPUTS:
+% 
 %   model_adj: The adjusted PC model
+% 
 
 % Checking input format
 [ch,cw] = size(C_matrix);

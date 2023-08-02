@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of formulatePCOptKnock</title>
+  <meta name="keywords" content="formulatePCOptKnock">
+  <meta name="description" content="Prepare MILP model structure for pcOptKnock">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">src</a> &gt; <a href="index.html">PC-OptKnock</a> &gt; formulatePCOptKnock.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for src/PC-OptKnock&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>formulatePCOptKnock
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Prepare MILP model structure for pcOptKnock</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin,PCBool) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Prepare MILP model structure for pcOptKnock
+ 
+ USAGE:
+ 
+   [milp_pcok,param] = formulatePCOptKnock(model_pc,1,0.05,true);
+   (alternatively, milp_ok = formulatePCOptKnock(model_m,1,0.05,false);)
+ 
+ INPUTS:
+ 
+   model:  A PC-model produced by function pcModel.m
+   numKO:  The maximum number of knocked out allowed. This can be later
+           changed by changeNumKO. 
+           Default: 1
+   objMin: The lower bound for the objective rxn (model.c). 
+           Default: 0.05
+   PCBool: Set this flag to false to construct an ordinary OptKnock model
+           struct instead of PC-OptKnock. If set to false, input model
+           should also be the base M-model instead of PC-model. 
+           Default: true
+ 
+ OUTPUTS:
+ 
+   pcOptKnockMILP: MILP struct formulated for Gurobi optimizer
+   param:          Solver parameters that can be passed in to the solver</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+
+<hr><address>Generated on Tue 01-Aug-2023 20:53:16 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

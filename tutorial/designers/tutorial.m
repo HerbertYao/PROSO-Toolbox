@@ -29,7 +29,7 @@ rxnIdx.EX_succ = 594;
 
 % This model is setup to solely grow on glucose
 
-model_ori.lb(rxnIdx.EX_o2) = -1000; % alleviate oxygen constraint
+% model_ori.lb(rxnIdx.EX_o2) = -1000; % alleviate oxygen constraint
 
 FBAsol = optimizeCbModel(model_ori,'max');
 fprintf('With glucose: growth rate: %.3f hr^-1\n',FBAsol.f);
@@ -249,7 +249,8 @@ drawSolutionEnvelope(models_sol{4},model_pc_ori.rxns{rxnIdx.biomass},model_pc_or
 % Let's use the PC-OptKnock K = 1+1+1 result as an example, note that these
 % are the knockouts from that tutorial section:
 
-KOProteins = {'EX_protein_YPR001W','EX_protein_Q0250','EX_protein_YBR196C','EX_protein_YKL029C'};
+KOProteins = {'EX_protein_YPR002W','EX_protein_Q0250','EX_protein_YBR196C','EX_protein_YKL029C'};
+% KOProteins = {'EX_protein_Q0250','EX_protein_YBR196C'};
 
 proteinExIdx = find(startsWith(model_pc_ori.rxns,'EX_protein_'));
 metRxnIdx = 1:1577;
@@ -307,6 +308,22 @@ ylabel(['PC 2: ',num2str(exp_p(2)),'%']);
 % movement for the metabolism toward the new optimum. This is what we want
 % to achieve by MOMA.
 
+% We can also see how growth and succinate production are affected
+
+figure;
+
+hold on;
+plot3(FBAsols(rxnIdx.biomass,:),sc_p(2:end,1),FBAsols(rxnIdx.EX_succ,:),'o-');
+plot3(FBAsol_wt.v(rxnIdx.biomass),sc_p(1,1),FBAsol_wt.v(rxnIdx.EX_succ),'*','MarkerSize',10);
+plot3(FBAsols(rxnIdx.biomass,end),sc_p(end,1),FBAsols(rxnIdx.EX_succ,end),'*','MarkerSize',10);
+plot3(FBAsols(rxnIdx.biomass,2),sc_p(2,1),FBAsols(rxnIdx.EX_succ,2),'*','MarkerSize',10);
+hold off;
+legend({'migrating route','wildtype optimum point','knockout strain optimum point','MOPA point'});
+xlabel('Growth Rate');
+ylabel('Proteome PC 1');
+zlabel('Succinate Production Rate');
+% set(gca,'Xscale','log');
+
 %% minimalGenome
 
 % The minimal genome is an interesting concept in synthetic biology: by
@@ -326,4 +343,3 @@ ylabel(['PC 2: ',num2str(exp_p(2)),'%']);
 % genome size while preserving the ability to produce succinate and grow to
 % a certain degree. 
 
-% TODO

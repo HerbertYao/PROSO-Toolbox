@@ -1,4 +1,29 @@
 function FBAsols = proteinTween(model,FBAsol_init,objRxn,nSteps)
+% proteinTween finds the path from a certain solution to optima in nSteps.
+% This is accomplished by tightly constraint the model's proteome to the
+% previous step's solution and allows only a certain 'budget' of total 
+% protein adjustment from the previous step (ribosomal PC-FBA). The output
+% is the optimal trace of the cell moving from FBAsol_init to the optimum. 
+% 
+% USAGE:
+% 
+%   FBAsols = proteinTween(model_pc,FBAsol_old,'BIOMASS_SC5_notrace',20);
+% 
+% INPUTS:
+% 
+%   model:       A PC-model formulated by function pcModel.m
+%   FBAsol_init: The solution representing the current cell proteomic +
+%                metabolic state. This can be a result from OVERLAY, MOPA,
+%                or anything else. 
+%   objRxn:      The objective reaction that is assumed to optimize over
+%                a period of time. 
+%   nSteps:      The number of steps taken between FBAsol_init and the
+%                optimum. 
+% 
+% OUTPUTS:
+% 
+%   FBAsols: A matrix with every ribosomal PC-FBA solutions. 
+% 
 
 model_ori = model;
 proteinExIdx = find(startsWith(model.rxns,'EX_protein_'));

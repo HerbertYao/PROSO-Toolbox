@@ -1,19 +1,22 @@
 function K_matrix_new = estimateKeffFromMW(C_matrix,K_matrix,proteinMW)
 
-% Estimating every rate constant of enzymes using its molar weight while
-% keeping the same avg k_eff
+% Estimating rate constant of enzymes using its molar weight
 % Equation: Keff_cplx_i = Keff_avg * (MW_cplx_i / MW_avg)^0.75
 % 
 % USAGE:
-%   K_matrix_adj = proteinConstraintModel(C_matrix,K_matrix,proteinMW);
+% 
+%   K_matrix_adj = estimateKeffFromMW(C_matrix,K_matrix,proteinMW);
 % 
 % INPUTS:
-%   C_matrix:  
-%   K_matrix:  
-%   proteinMW: 
+% 
+%   C_matrix:  Matrix denotes stoich relationship between protein and cplx
+%   K_matrix:  Matrix denotes catalyzing capability of enzymes to rxns
+%   proteinMW: Vector for protein molecular weight
 % 
 % OUTPUTS:
-%   K_matrix_new: Estimated K_matrix
+% 
+%   K_matrix_new: Newly estimated K_matrix
+% 
 
 % Record the original Keff
 [~,enzymeLen] = size(C_matrix);

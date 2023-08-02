@@ -1,4 +1,20 @@
 function model_pc_new = updatePCModelKeffByR(model_pc,rValues)
+% This function implements QP solutions to a PC-model.
+% It produces a N*1 structure contains context-specific PC-models
+% 
+% USAGE:
+% 
+%   model_pc_new = updatePCModelKeffByR(model_pc,rValues);
+% 
+% INPUTS:
+% 
+%   model_pc: A PC model built from the function 'pcModel.m'
+%   rValues:  The r vector that is potentially produced by nonconvex QP
+% 
+% OUTPUTS:
+% 
+%   model_pc_new: PC-model with updated R
+% 
 
 model_pc_new = model_pc;
 

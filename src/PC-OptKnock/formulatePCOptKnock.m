@@ -1,19 +1,23 @@
-function [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin,FVABool,PCBool)
-%%
-% This function prepares for pcOptKnock by formulating a MILP to be fed in
-% the optKnock
+function [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin,PCBool)
+% Prepare MILP model structure for pcOptKnock
 % 
 % USAGE:
 % 
-%   milp_ok = formulatePCOptKnock(model_pc);
+%   [milp_pcok,param] = formulatePCOptKnock(model_pc,1,0.05,true);
+%   (alternatively, milp_ok = formulatePCOptKnock(model_m,1,0.05,false);)
 % 
 % INPUTS:
 % 
-%   model:       A PC-model produced by function pcModel.m or preferably
-%                refined by adjustStoichAndKeff.m
-%   numKO: The maximum number of knocked out allowed. This can be later
-%   changed by changeNumKO
-%   
+%   model:  A PC-model produced by function pcModel.m
+%   numKO:  The maximum number of knocked out allowed. This can be later
+%           changed by changeNumKO. 
+%           Default: 1
+%   objMin: The lower bound for the objective rxn (model.c). 
+%           Default: 0.05
+%   PCBool: Set this flag to false to construct an ordinary OptKnock model
+%           struct instead of PC-OptKnock. If set to false, input model
+%           should also be the base M-model instead of PC-model. 
+%           Default: true
 % 
 % OUTPUTS:
 % 
@@ -28,34 +32,20 @@ end
 if ~exist('objMin','var')
     objMin = 0.05;
 end
-if ~exist('FVABool','var')
-    FVABool = true;
-end
 if ~exist('PCBool','var')
     PCBool = true;
 end
 
 fprintf('Configuring MILP from model...');
 
-% Further constrain PC-model
-if FVABool
-    fprintf('FVA...');
-    for i = 1:length(model.rxns)
-        model_alt = changeObjective(model,model.rxns{i});
-        FBAsol = optimizeCbModel(model_alt,'max');
-        model.ub(i) = FBAsol.f;
-        FBAsol = optimizeCbModel(model_alt,'min');
-        model.lb(i) = FBAsol.f;
-    end
-else
-    for i = 1:length(model.rxns)
-        if model.lb(i) < -1000
-            model.lb(i) = -1000;
-        end
-        if model.ub(i) > 1000
-            model.ub(i) = 1000;
-        end
-    end
+% FVA to further constrain PC-model
+fprintf('FVA...');
+for i = 1:length(model.rxns)
+    model_alt = changeObjective(model,model.rxns{i});
+    FBAsol = optimizeCbModel(model_alt,'max');
+    model.ub(i) = FBAsol.f;
+    FBAsol = optimizeCbModel(model_alt,'min');
+    model.lb(i) = FBAsol.f;
 end
 
 % Modify proteinWC so its b is also zero. Also all csense are now E
@@ -308,7 +298,7 @@ if PCBool
 end
 
 % Fixing binary vars of growth-essential proteins to 1
-if PCBool && FVABool
+if PCBool
     fprintf('Keeping growth-essential proteins open...');
     
     for i = 1:length(model.rxns)

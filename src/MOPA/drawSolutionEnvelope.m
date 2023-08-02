@@ -1,4 +1,24 @@
 function [v1,v2] = drawSolutionEnvelope(model,rxnId1,rxnId2,NSteps,drawFlag,rxnWgt1,rxnWgt2)
+% This function draws a 2d production envelope
+% 
+% USAGE:
+% 
+%   model_ribo = proteinTween(model_pc,10);
+% 
+% INPUTS:
+% 
+%   model:    A PC-model formulated by function pcModel.m
+%   rxnId1:   The first rxn of interests
+%   rxnId2:   The second rxn of interests
+%   NSteps:   Number of points taken between v1_max and v1_min
+%   drawFlag: If the function plot a figure
+%   rxnWgt1:  TODO
+%   rxnWgt2:  TODO
+% 
+% OUTPUTS:
+% 
+%   FBAsols: A matrix with every ribosomal PC-FBA solutions. 
+% 
 
 if ~exist('rxnWgt1','var')
     rxnWgt1 = 1;
@@ -9,7 +29,7 @@ end
 
 % Determine rxn 1 flux range (slightly slacked)
 
-model = changeObjective(model,rxnId1,rxnWgt1);
+model = changeObjective(model,rxnId1);
 FBAsol = optimizeCbModel(model,'max');
 v1_max = FBAsol.f - abs(FBAsol.f)*0.0001;
 FBAsol = optimizeCbModel(model,'min');
@@ -23,7 +43,7 @@ v1 = [v1_min:(v1_max-v1_min)/(NSteps-1):v1_max,...
 
 v2 = zeros(NSteps*2,1);
 
-model = changeObjective(model,rxnId2,rxnWgt2);
+model = changeObjective(model,rxnId2);
 
 % FVA
 

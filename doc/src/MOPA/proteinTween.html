@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of proteinTween</title>
+  <meta name="keywords" content="proteinTween">
+  <meta name="description" content="proteinTween finds the path from a certain solution to optima in nSteps.">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">src</a> &gt; <a href="index.html">MOPA</a> &gt; proteinTween.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for src/MOPA&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>proteinTween
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>proteinTween finds the path from a certain solution to optima in nSteps.</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function FBAsols = proteinTween(model,FBAsol_init,objRxn,nSteps) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> proteinTween finds the path from a certain solution to optima in nSteps.
+ This is accomplished by tightly constraint the model's proteome to the
+ previous step's solution and allows only a certain 'budget' of total 
+ protein adjustment from the previous step (ribosomal PC-FBA). The output
+ is the optimal trace of the cell moving from FBAsol_init to the optimum. 
+ 
+ USAGE:
+ 
+   FBAsols = proteinTween(model_pc,FBAsol_old,'BIOMASS_SC5_notrace',20);
+ 
+ INPUTS:
+ 
+   model:       A PC-model formulated by function pcModel.m
+   FBAsol_init: The solution representing the current cell proteomic +
+                metabolic state. This can be a result from OVERLAY, MOPA,
+                or anything else. 
+   objRxn:      The objective reaction that is assumed to optimize over
+                a period of time. 
+   nSteps:      The number of steps taken between FBAsol_init and the
+                optimum. 
+ 
+ OUTPUTS:
+ 
+   FBAsols: A matrix with every ribosomal PC-FBA solutions.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="formulateRibosomalPCModel.html" class="code" title="function model_ribo = formulateRibosomalPCModel(model,RibosomeBudget)">formulateRibosomalPCModel</a>	This function formulates a ribosomal PC-model.</li><li><a href="updateRiboPCModel.html" class="code" title="function model_ribo_new = updateRiboPCModel(model_ribo,FBAsol)">updateRiboPCModel</a>	This function update ribosomal PC-model's existing proteome vector.</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+
+<hr><address>Generated on Tue 01-Aug-2023 20:53:16 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>

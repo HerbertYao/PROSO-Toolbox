@@ -1,24 +1,25 @@
-function [MOPAsol,FBAsol_wt,FBAsol_mut,matchTable] = MOPA(model,KOGene)
-
+function [MOPAsol,FBAsol_wt,FBAsol_mut] = MOPA(model,KOGene)
+% MOPA finds a solution of a mutation strain closest to the old optima. 
 % Adapted from minimization of metabolic ajustment (MOMA), minimization of
 % proteomic adjustment (MOPA) can find the sub-optimal solution when a cell
-% just have a set of gene mutated based on its original mode of metabolism.
+% just have a set of gene mutated based on its original mode of proteome.
 % A solver capable of solving QP is required
 % 
 % USAGE:
 % 
-%   FBAsol_mopa = MOPA(model_pc,{'EX_protein_s0001','EX_protein_s0002'});
+%   MOPAsol = MOPA(model_pc,{'EX_protein_s0001','EX_protein_s0002'});
 % 
 % INPUTS:
 % 
-%   model:    A PC-model produced by function pcModel.m or preferably
-%             refined by adjustStoichAndKeff.m
+%   model:    A PC-model formulated by function pcModel.m
 %   delProts: Protein exchanges to be closed as a result of mutation
+%             Default: {}
 % 
 % OUTPUTS:
 % 
-%   model_ok:
-%   matchTable:
+%   MOPAsol:    The MOPA solution
+%   FBAsol_wt:  Wildtype optimal solution
+%   FBAsol_mut: Mutant strain optimal solution
 % 
 
 % Obj: min (0.5*p'Ip - p_ori*p)
@@ -59,12 +60,6 @@ end
 
 % Solve and return match table
 MOPAsol = solveCobraQP(qp);
-matchTable = zeros(length(proteinExIdx),2);
-
-for i = 1:length(proteinExIdx)
-    matchTable(i,1) = FBAsol.v(proteinExIdx(i));
-    matchTable(i,2) = MOPAsol.full(proteinExIdx(i));
-end
 
 % Retrive wildtype optimum
 FBAsol_wt = FBAsol;

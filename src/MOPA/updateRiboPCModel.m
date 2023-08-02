@@ -1,4 +1,20 @@
 function model_ribo_new = updateRiboPCModel(model_ribo,FBAsol)
+% This function update ribosomal PC-model's existing proteome vector. 
+% 
+% USAGE:
+% 
+%   model_ribo = updateRiboPCModel(model_ribo,FBAsol);
+% 
+% INPUTS:
+% 
+%   model_ribo: A ribosomal PC-model from formulateRibosomalPCModel.m
+%   FBAsol:     The LP, MILP, or QP solution representing the cell's 
+%               previous operating point
+% 
+% OUTPUTS:
+% 
+%   model_ribo_new: The updated ribosomal PC-model
+% 
 
 proteinExIdx = find(startsWith(model_ribo.rxns,'EX_protein_'));
 lbProteinIdx = find(startsWith(model_ribo.mets,'LB_protein_'));

@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of overlayMultiomicsData</title>
+  <meta name="keywords" content="overlayMultiomicsData">
+  <meta name="description" content="A function that find a solution which fits a transcriptome count matrix">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">src</a> &gt; <a href="index.html">OVERLAY</a> &gt; overlayMultiomicsData.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for src/OVERLAY&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+
+<h1>overlayMultiomicsData
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>A function that find a solution which fits a transcriptome count matrix</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function [FBAsol,model_fit] = overlayMultiomicsData(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> A function that find a solution which fits a transcriptome count matrix
+ as closely as possible. Reaction constraints have to be set up prior to
+ using this function (such as minimal growth rate or production)
+ 
+ USAGE:
+   FBAsol = overlayMultiomicsData(model_pc,count,5,[0.1,1000]);
+ 
+ INPUTS:
+   model:    A PC-model produced by function pcModel.m or preferably
+               refined by adjustStoichAndKeff.m
+   data:     Transcriptome or proteome data in M*N matrix
+               M = length of protein vector
+               N = number of sets of data. N~=1 is only allowed when
+                   keffEstimate = true
+   thres:    Lower threshold for an abundance count to be considered
+               relevant. Default = 0
+   waiver:   A cell array contains proteinMets that needs to be waivered
+               from fitting. Default = {}
+               E.g., {'protein_b0001','protein_b0002'}.
+   varargin: optional parameter value pairs
+       keffEstimate: If enzymatic rate constants are treated as variables.
+                     Setting to true will lead to nonconvex QP, which
+                     Gurobi solver must be installed. Default = false
+       objWeight: Allows the algorithm to minimize weighted sum of 
+                  proteome fitting. Only works when variableKeff = false. 
+                  Default = []
+       rBounds: Allows setting upper and lower bounds for r variables when
+                variableKeff = true. Default = [0.1,1.9]
+       variedKeff: M*1 binary vector indicating if each keff can be varied
+                   or not. Default algorithm automatically decide the
+                   variability of each keff. Only works when 
+                   keffEstimate = true
+       rxnBounds: Allows changing rxn bounds for each set of data
+                  separately. When applied, all lb and ub are overwritten. 
+                  Input must be a R*N*2 3D matrix where R is the total 
+                  number of reactions. Only works when keffEstimate = true
+ 
+ OUTPUTS:
+   FBAsol: FBA solution structure of best possible transcriptome fitting</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+
+<hr><address>Generated on Tue 01-Aug-2023 20:53:16 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+</body>
+</html>
