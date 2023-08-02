@@ -4,7 +4,7 @@
 <head>
   <title>Description of overlayMultiomicsData</title>
   <meta name="keywords" content="overlayMultiomicsData">
-  <meta name="description" content="A function that find a solution which fits a transcriptome count matrix">
+  <meta name="description" content="Finds a sol which fits a given transcriptome as closely as possible.">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,20 +21,22 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>A function that find a solution which fits a transcriptome count matrix</strong></div>
+<div class="box"><strong>Finds a sol which fits a given transcriptome as closely as possible.</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function [FBAsol,model_fit] = overlayMultiomicsData(varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> A function that find a solution which fits a transcriptome count matrix
- as closely as possible. Reaction constraints have to be set up prior to
- using this function (such as minimal growth rate or production)
+<div class="fragment"><pre class="comment"> Finds a sol which fits a given transcriptome as closely as possible. 
+ Reaction constraints have to be set up prior to using this function (such
+ as minimal growth rate or production).
  
  USAGE:
+ 
    FBAsol = overlayMultiomicsData(model_pc,count,5,[0.1,1000]);
  
  INPUTS:
+ 
    model:    A PC-model produced by function pcModel.m or preferably
                refined by adjustStoichAndKeff.m
    data:     Transcriptome or proteome data in M*N matrix
@@ -65,6 +67,7 @@
                   number of reactions. Only works when keffEstimate = true
  
  OUTPUTS:
+ 
    FBAsol: FBA solution structure of best possible transcriptome fitting</pre></div>
 
 <!-- crossreference -->
@@ -80,6 +83,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Tue 01-Aug-2023 20:53:16 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+<hr><address>Generated on Wed 02-Aug-2023 12:26:43 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

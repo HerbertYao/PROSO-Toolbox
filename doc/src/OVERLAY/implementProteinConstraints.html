@@ -31,16 +31,23 @@
  It produces a N*1 structure contains context-specific PC-models
  
  USAGE:
-   K_matrix_adj = implementProteinConstraints(C_matrix,K_matrix,proteinMW);
+ 
+   models = implementProteinConstraints(model_pc,QPsols,...
+            {'EX_protein_s0001'},0.03);
  
  INPUTS:
-   model:  
-   QPsols:  
-   waiverList: 
-   s: 
+ 
+   model:      A PC model built from the function 'pcModel.m'
+   QPsols:     The QP solution matrix constructed from concatenating
+               N number of convex QP solutions together. 
+   waiverList: This waiverList should be the same as used for the QP. 
+   s:          Universal slack term for the protein constraint. Please
+               check the tutorial or the publication for more details.
+               Default: 0.02
  
  OUTPUTS:
-   models:</pre></div>
+ 
+   models: A N*1 struct containing context-specific PC-models</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -55,6 +62,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Tue 01-Aug-2023 20:53:16 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+<hr><address>Generated on Wed 02-Aug-2023 12:26:43 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

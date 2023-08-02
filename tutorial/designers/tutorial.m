@@ -327,6 +327,8 @@ zlabel('Succinate Production Rate');
 
 %% PC-Dynamic FBA
 
+% TODO %
+
 %% minimalGenome
 
 % The minimal genome is an interesting concept in synthetic biology: by
@@ -346,5 +348,4 @@ zlabel('Succinate Production Rate');
 % genome size while preserving the ability to produce succinate and grow to
 % a certain degree. 
 
-% TODO
-
+% TODO %

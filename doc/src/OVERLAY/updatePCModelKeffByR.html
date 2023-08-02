@@ -31,16 +31,17 @@
  It produces a N*1 structure contains context-specific PC-models
  
  USAGE:
-   K_matrix_adj = updatePCModelKeffByR(C_matrix,K_matrix,proteinMW);
+ 
+   model_pc_new = updatePCModelKeffByR(model_pc,rValues);
  
  INPUTS:
-   model:  
-   QPsols:  
-   waiverList: 
-   s: 
+ 
+   model_pc: A PC model built from the function 'pcModel.m'
+   rValues:  The r vector that is potentially produced by nonconvex QP
  
  OUTPUTS:
-   models:</pre></div>
+ 
+   model_pc_new: PC-model with updated R</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -55,6 +56,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Tue 01-Aug-2023 20:53:16 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+<hr><address>Generated on Wed 02-Aug-2023 12:26:43 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

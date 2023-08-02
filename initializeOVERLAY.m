@@ -3,7 +3,7 @@ function initializeOVERLAY()
 % Initialization and set up OVERLAY Toolbox
 
 fprintf('============================\n');
-fprintf('   OVERLAY Toolbox v1.0.1   \n');
+fprintf('   OVERLAY Toolbox v2.0.0   \n');
 fprintf('============================\n');
 
 % Check availability of COBRA Toolbox

@@ -4,7 +4,7 @@
 <head>
   <title>Description of pcModel</title>
   <meta name="keywords" content="pcModel">
-  <meta name="description" content="(MAIN) A function that produce a proteomically constrainted m-model from">
+  <meta name="description" content="(MAIN) Construct a PC-model from M-model">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -12,28 +12,31 @@
 </head>
 <body>
 <a name="_top"></a>
-<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">src</a> &gt; <a href="index.html">OVERLAY</a> &gt; pcModel.m</div>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">src</a> &gt; <a href="index.html">PC-FBA</a> &gt; pcModel.m</div>
 
 <!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
-<td align="right"><a href="index.html">Index for src/OVERLAY&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+<td align="right"><a href="index.html">Index for src/PC-FBA&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
 
 <h1>pcModel
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>(MAIN) A function that produce a proteomically constrainted m-model from</strong></div>
+<div class="box"><strong>(MAIN) Construct a PC-model from M-model</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM] = pcModel(model,fasta,maxWeightFrac) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> (MAIN) A function that produce a proteomically constrainted m-model from 
- a common m-model and protein sequence data. 
+<div class="fragment"><pre class="comment"> (MAIN) Construct a PC-model from M-model
+ A function that produce a protein constrainted M-model from a base 
+ M-model and protein sequence data. 
  
  USAGE:
+ 
    new_model = proteinConstraintModel(model,'Paeruginosa.fasta',550);
  
  INPUTS:
+ 
    model: A functional COBRA model struct with the field 'genes'
    fasta: The file name of a proteome fasta file containing geneID 
           (same set of ID as model.genes) as header and respective protein 
@@ -43,6 +46,7 @@
           fasta. The modelling accuracy will be compromised.
  
  OPTIONAL INPUTS:
+ 
    maxWeightFrac: A double denotes the maximum weight fraction of total
                   protein components, in mg/gDW. Default = 550mg/gDW
    keff_refTable: A n*2 cell array with enzyme ID in the first column and
@@ -51,6 +55,7 @@
                   (NOT YET FINISHED)
  
  OUTPUTS:
+ 
    constraintedModel: A m-model with proteomic constraint
    fullProtein:       A full list of proteins added to model.mets
    fullEnzyme:        A full list of enzymes added to model.mets
@@ -59,10 +64,12 @@
    fullProteinMM:     Molar mass of each protein in fullProtein
  
  REQUIREMENTS:
+ 
    MATLAB with Bioinformatics and Deep Learning Toolbox installed
    Configured CobraToolbox with at least one capable solver
  
  Important Note:
+ 
    New_model.mets will contain all proteins and enzymes (protein
    complexes). Each protein and enzyme will have an exchange rxn and a
    enzyme formation rxn. Fluxes of these reactions are not real flux, but
@@ -74,7 +81,7 @@
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="calcProteinMM.html" class="code" title="function MM = calcProteinMM(seq)">calcProteinMM</a>	The function returns the molar mass of a given protein sequence, which</li><li><a href="findProteinSeq.html" class="code" title="function seq = findProteinSeq(geneID, fasta, avgLen)">findProteinSeq</a>	The function returns a protein sequence from fasta file. If the ID is not</li><li><a href="parseGeneRule.html" class="code" title="function enzymeString = parseGeneRule(ruleString)">parseGeneRule</a>	This function parse model.rules{i} into a array of all possible enzymes</li></ul>
+<li><a href="calcProteinMM.html" class="code" title="function MM = calcProteinMM(seq)">calcProteinMM</a>	The function returns the molar mass of a given protein sequence.</li><li><a href="findProteinSeq.html" class="code" title="function seq = findProteinSeq(geneID, fasta, avgLen)">findProteinSeq</a>	The function returns a protein sequence from fasta file. If the ID is not</li><li><a href="parseGeneRule.html" class="code" title="function enzymeString = parseGeneRule(ruleString)">parseGeneRule</a>	This function parse model.rules{i} into a array of all possible enzymes</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -83,6 +90,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Tue 01-Aug-2023 20:53:16 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+<hr><address>Generated on Wed 02-Aug-2023 12:26:43 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>

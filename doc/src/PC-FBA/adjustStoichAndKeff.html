@@ -4,7 +4,7 @@
 <head>
   <title>Description of adjustStoichAndKeff</title>
   <meta name="keywords" content="adjustStoichAndKeff">
-  <meta name="description" content="A function that modify PC model based on C and Keff matrix provided">
+  <meta name="description" content="A function that modify PC-model based on C and Keff matrix provided">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -12,28 +12,29 @@
 </head>
 <body>
 <a name="_top"></a>
-<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">src</a> &gt; <a href="index.html">OVERLAY</a> &gt; adjustStoichAndKeff.m</div>
+<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">src</a> &gt; <a href="index.html">PC-FBA</a> &gt; adjustStoichAndKeff.m</div>
 
 <!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
-<td align="right"><a href="index.html">Index for src/OVERLAY&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+<td align="right"><a href="index.html">Index for src/PC-FBA&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
 
 <h1>adjustStoichAndKeff
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>A function that modify PC model based on C and Keff matrix provided</strong></div>
+<div class="box"><strong>A function that modify PC-model based on C and Keff matrix provided</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function model_adj = adjustStoichAndKeff(model,C_matrix,K_matrix) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> A function that modify PC model based on C and Keff matrix provided
+<div class="fragment"><pre class="comment"> A function that modify PC-model based on C and Keff matrix provided
  
  USAGE:
  
-   model_adj = proteinConstraintModel(model,C_matrix,K_matrix);
+   model_adj = adjustStoichAndKeff(model,C_matrix,K_matrix);
  
  INPUTS:
+ 
    model:    A PC model built from the function 'pcModel.m'
    C_matrix: Denotes stoich relationship between protein and cplx, must be
              the same dimension as C_matrix output from 'pcModel.m'
@@ -41,6 +42,7 @@
              same demension as K_matrix output from 'pcModel.m'
  
  OUTPUTS:
+ 
    model_adj: The adjusted PC model</pre></div>
 
 <!-- crossreference -->
@@ -56,6 +58,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Tue 01-Aug-2023 20:53:16 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+<hr><address>Generated on Wed 02-Aug-2023 12:26:43 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
 </body>
 </html>
