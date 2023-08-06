@@ -6,7 +6,7 @@
   <meta name="keywords" content="pcModel">
   <meta name="description" content="(MAIN) Construct a PC-model from M-model">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
   <meta name="robots" content="index, follow">
   <link type="text/css" rel="stylesheet" href="../../m2html.css">
 </head>
@@ -33,7 +33,7 @@
  
  USAGE:
  
-   new_model = proteinConstraintModel(model,'Paeruginosa.fasta',550);
+   new_model = proteinConstraintModel(model,'Paeruginosa.fasta',150);
  
  INPUTS:
  
@@ -48,11 +48,11 @@
  OPTIONAL INPUTS:
  
    maxWeightFrac: A double denotes the maximum weight fraction of total
-                  protein components, in mg/gDW. Default = 550mg/gDW
+                  protein components, in mg/gDW. Default = 150mg/gDW
    keff_refTable: A n*2 cell array with enzyme ID in the first column and
                   keff value in the second column, unit in 1/h. Enzymes 
                   not found in this table will be assigned keff = 234000
-                  (NOT YET FINISHED)
+                  % TODO %
  
  OUTPUTS:
  
@@ -90,6 +90,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Wed 02-Aug-2023 12:26:43 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+<hr><address>Generated on Sun 06-Aug-2023 03:00:39 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

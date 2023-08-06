@@ -1,4 +1,5 @@
 function milp = changeNumKO(milp,numKO)
+
 % Update numKO for PC-OptKnock model struct
 % 
 % USAGE:

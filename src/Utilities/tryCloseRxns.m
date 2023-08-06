@@ -1,7 +1,33 @@
 function [model_new,openRxnList] = tryCloseRxns(model,rxnList,closeDir,mu_min)
-% Close as many designated reactions as possible while maintaining growth
+
+% Close as many designated reactions as possible while sustaining growth
+% 
 % This is especially useful for setting up a medium with messy exchange rxn
-% bounds.
+% bounds. For example, the usage example below shows how to find a feasible
+% M-model with as little uptake reactions as possible. 
+% 
+% USAGE:
+% 
+%   allExRxns = model_ori.rxns(find(startsWith(model_ori.rxns,'EX_')));
+%   closeDir = -1 * ones(1,length(allExRxns));
+%   model_new = tryCloseRxns(model_ori,allExRxns,closeDir,0.2);
+% 
+% INPUTS:
+% 
+%   model:    An M-model or PC-model produced by function pcModel.m
+%   rxnList:  The list of rxn to be closed
+%   closeDir: Which way is each rxn in rxnList is shutting down. For
+%             example, -1 for rxn "EX_o2_e" means we are attempting to make
+%             an anaerobic environment (EX_o2_e.lb = 0), and 1 for the same
+%             rxn means we want to stop the cell from producing oxygen
+%             (EX_o2_e.ub = 0)
+%   mu_min:   The minimal objective flux
+% 
+% OUTPUTS:
+% 
+%   model_new:   The model with closed rxns lb or ub changed to 0
+%   openRxnList: The list of rxns from rxnList that is left open
+% 
 
 model_milp = model;
 

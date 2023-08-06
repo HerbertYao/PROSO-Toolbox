@@ -250,8 +250,8 @@ drawSolutionEnvelope(models_sol{4},model_pc_ori.rxns{rxnIdx.biomass},model_pc_or
 % Let's use the PC-OptKnock K = 1+1+1 result as an example, note that these
 % are the knockouts from that tutorial section:
 
-KOProteins = {'EX_protein_YPR002W','EX_protein_Q0250','EX_protein_YBR196C','EX_protein_YKL029C'};
-% KOProteins = {'EX_protein_Q0250','EX_protein_YBR196C'};
+% KOProteins = {'EX_protein_YPR002W','EX_protein_Q0250','EX_protein_YBR196C','EX_protein_YKL029C'};
+KOProteins = {'EX_protein_Q0250','EX_protein_YBR196C'};
 
 proteinExIdx = find(startsWith(model_pc_ori.rxns,'EX_protein_'));
 metRxnIdx = 1:1577;
@@ -267,14 +267,20 @@ metRxnIdx = 1:1577;
 % re-allocated uniformly between each step, but the metabolism change 
 % usually appear non-uniformal. 
 
-FBAsols = proteinTween(models_sol{4},MOPAsol,'BIOMASS_SC5_notrace',20);
+FBAsols = proteinTween(models_sol{2},MOPAsol,'BIOMASS_SC5_notrace',20);
 
 % The solution is too high in dimension to visualize, but we can plot the 
 % manifold after PCA. Note that PCA need to be done for metabolism and
 % proteome separately.
 
-[coef_m,sc_m,~,~,exp_m] = pca([FBAsol_wt.v(metRxnIdx),FBAsols(metRxnIdx,:)]');
-[coef_p,sc_p,~,~,exp_p] = pca([FBAsol_wt.v(proteinExIdx),FBAsols(proteinExIdx,:)]');
+[coef_m,sc_m,~,~,exp_m] = pca([FBAsol_wt.v(metRxnIdx),MOPAsol.full(metRxnIdx),FBAsols(metRxnIdx,:)]');
+[coef_p,sc_p,~,~,exp_p] = pca([FBAsol_wt.v(proteinExIdx),MOPAsol.full(proteinExIdx),FBAsols(proteinExIdx,:)]');
+
+% Also plot the production envelope for reference
+[v1_wt,v2_wt] = drawSolutionEnvelope(model_pc_ori,...
+    model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},20,false);
+[v1_mt,v2_mt] = drawSolutionEnvelope(models_sol{2},...
+    models_sol{2}.rxns{rxnIdx.biomass},models_sol{2}.rxns{rxnIdx.EX_succ},20,false);
 
 % Plot the manifold
 
@@ -282,11 +288,11 @@ figure;
 
 subplot(2,1,1);
 hold on;
-plot(sc_m(2:end,1),sc_m(2:end,2),'o-');
-plot(sc_m(1,1),sc_m(1,2),'*','MarkerSize',10);
-plot(sc_m(end,1),sc_m(end,2),'*','MarkerSize',10);
-plot(sc_m(2,1),sc_m(2,2),'*','MarkerSize',10);
-legend({'migrating route','wildtype optimum point','knockout strain optimum point','MOPA point'});
+plot(sc_m(2:end,1),sc_m(2:end,2),'o-'); % migration path
+plot(sc_m(1,1),sc_m(1,2),'*','MarkerSize',10); % WT optimum
+plot(sc_m(end,1),sc_m(end,2),'*','MarkerSize',10); % KO strain optimum
+plot(sc_m(2,1),sc_m(2,2),'*','MarkerSize',10); % MOPA point
+legend({'migrating route','wildtype optimum','knockout strain optimum','MOPA point'});
 title('Metabolism');
 xlabel(['PC 1: ',num2str(exp_m(1)),'%']);
 ylabel(['PC 2: ',num2str(exp_m(2)),'%']);
@@ -305,25 +311,32 @@ ylabel(['PC 2: ',num2str(exp_p(2)),'%']);
 % From this plot, you can indeed see the MOPA solution is the closest to
 % the wildtype point, but only for the proteome. The pattern is a lot
 % harder to see for metabolic vectors. However, the re-allocation of
-% proteome, despite not moving linearly itself, allows an almost linear 
+% proteome, despite not moving linearly itself, allows an highly efficient 
 % movement for the metabolism toward the new optimum. This is what we want
 % to achieve by MOMA.
 
-% We can also see how growth and succinate production are affected
+% We can also see how growth and succinate production are affected by
+% proteome change in 3d
 
 figure;
 
 hold on;
-plot3(FBAsols(rxnIdx.biomass,:),sc_p(2:end,1),FBAsols(rxnIdx.EX_succ,:),'o-');
-plot3(FBAsol_wt.v(rxnIdx.biomass),sc_p(1,1),FBAsol_wt.v(rxnIdx.EX_succ),'*','MarkerSize',10);
-plot3(FBAsols(rxnIdx.biomass,end),sc_p(end,1),FBAsols(rxnIdx.EX_succ,end),'*','MarkerSize',10);
-plot3(FBAsols(rxnIdx.biomass,2),sc_p(2,1),FBAsols(rxnIdx.EX_succ,2),'*','MarkerSize',10);
+plot3([MOPAsol.full(rxnIdx.biomass),FBAsols(rxnIdx.biomass,:)],...
+    [MOPAsol.full(rxnIdx.EX_succ),FBAsols(rxnIdx.EX_succ,:)],sc_p(2:end,1),'o-','LineWidth',2);
+plot3(FBAsol_wt.v(rxnIdx.biomass),FBAsol_wt.v(rxnIdx.EX_succ),sc_p(1,1),'*','MarkerSize',15);
+plot3(FBAsols(rxnIdx.biomass,end),FBAsols(rxnIdx.EX_succ,end),sc_p(end,1),'*','MarkerSize',15);
+plot3(MOPAsol.full(rxnIdx.biomass),MOPAsol.full(rxnIdx.EX_succ),sc_p(2,1),'*','MarkerSize',15);
+
+plot3(v1_wt,v2_wt,min(sc_p(:,1))*ones(length(v1_wt),1),'--','LineWidth',2);
+plot3(v1_mt,v2_mt,min(sc_p(:,1))*ones(length(v1_mt),1),'--','LineWidth',2);
+
 hold off;
-legend({'migrating route','wildtype optimum point','knockout strain optimum point','MOPA point'});
+legend({'migrating route','WT optimum point','mutant strain optimum point',...
+    'MOPA point','WT production envelope','mutant strain production envelope'});
 xlabel('Growth Rate');
-ylabel('Proteome PC 1');
-zlabel('Succinate Production Rate');
-% set(gca,'Xscale','log');
+zlabel('Proteome PC 1');
+ylabel('Succ Production');
+grid on;
 
 %% PC-Dynamic FBA
 

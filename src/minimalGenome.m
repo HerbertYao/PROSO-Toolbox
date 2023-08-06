@@ -1,4 +1,4 @@
-function [model_min,KOList] = minimalGenome(model,percentOri,protectList)
+function [model_min,KOList] = minimalGenome(model,optPerc,protectList)
 
 % Finding a minimal cell by shutting down as many protein exchanges as
 % possible while keep the objective flux at a certain percentage of the
@@ -6,19 +6,19 @@ function [model_min,KOList] = minimalGenome(model,percentOri,protectList)
 % 
 % USAGE:
 % 
-%   model_min = findMinimalCell(model_pc,0.5);
+%   model_min = minimalGenome(model_pc,0.5);
 % 
 % INPUTS:
 % 
 %   model:       A PC-model produced by function pcModel.m or preferably
 %                refined by adjustStoichAndKeff.m
-%   percentOri:  
+%   optPerc:     The fraction of wildtype growth rate retained
 %   protectList: List of proteins mets that are protected from deletion
 % 
 % OUTPUTS:
 % 
-%   model_min:
-%   KOList:
+%   model_min: New PC-model with as many protein shutdown as possible
+%   KOList: The list of shutted down proteins
 % 
 
 model_min = model; % Keep the original model
@@ -26,7 +26,7 @@ model_min = model; % Keep the original model
 % Put a constraint on the original objective, then remove its objective
 % coefficient
 FBAsol = optimizeCbModel(model,'max');
-model.lb(find(model.c)) = FBAsol.f * percentOri;
+model.lb(find(model.c)) = FBAsol.f * optPerc;
 model.c(find(model.c)) = 0;
 
 % Add yu_protein metabolites to EX_protein reactions

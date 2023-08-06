@@ -579,37 +579,7 @@ clear i j;
 % will be stored in FVAsols.
 
 if ~exist('FVAsols','var')
-
-    FVAsols = zeros(length(model_ori.rxns),8,8);
-    optPerc = [0,0.5,0.9,0.99];
-
-    for i = 1:8
-        disp(i);
-
-        model_alt = models_db{i};
-        FBAsol = optimizeCbModel(model_alt,'max');
-
-        for j = 1:4
-            model_alt.lb(2015) = FBAsol.f * optPerc(j);
-
-            for k = 1:length(model_ori.rxns)
-                model_alt = changeObjective(model_alt,model_ori.rxns{k});
-                FBAsol_alt = optimizeCbModel(model_alt,'min');
-                FVAsols(k,i,j) = FBAsol_alt.f;
-            end
-        end
-
-        for j = 1:4
-            model_alt.lb(2015) = FBAsol.f * optPerc(5-j);
-
-            for k = 1:length(model_ori.rxns)
-                model_alt = changeObjective(model_alt,model_ori.rxns{k});
-                FBAsol_alt = optimizeCbModel(model_alt,'max');
-                FVAsols(k,i,j+4) = FBAsol_alt.f;
-            end
-        end
-
-    end
+    FVAsols = contextSpecificPCFVA(models_db,model_ori.rxns,[0,0.5,0.9,0.99]);
 end
 
 % FVA will take from 30 min to a few hours to complete. 
@@ -634,8 +604,8 @@ if ~exist('FVAsols_enz','var')
         
         for j = 1:8
             model_alt = changeObjective(models_db{j},model_pc.rxns{idx});
-            FBAso_alt = optimizeCbModel(model_alt,'max');
-            FVAsols_enz(i,j) = FBAso_alt.f;
+            FBAsol_alt = optimizeCbModel(model_alt,'max');
+            FVAsols_enz(i,j) = FBAsol_alt.f;
         end
     end
 end
@@ -724,6 +694,7 @@ for i = 1:length(rxnList)
         end
     end
 
+    bsv = min(FVAsols_plt(idx,:,1));
     h1 = bar(1:8,reshape([FVAsols_plt(idx,:,1),FVAsols_plt(idx,:,8)-FVAsols_plt(idx,:,1)],[8,2]),...
         0.8,'stacked','BaseValue',min(FVAsols_plt(idx,:,1)));
     h1(1).Visible = 'off';
@@ -749,7 +720,7 @@ for i = 1:length(rxnList)
         ylabel('expression');
     end
 
-    title(rxnList{i},'FontSize',16,'Interpreter','none');
+    title(rxnList{i},'FontSize',10,'Interpreter','none');
 end
 
 % From the plotting, we can clearly see the correlation of flux-flux and

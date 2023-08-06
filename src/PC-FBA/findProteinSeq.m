@@ -1,4 +1,5 @@
 function seq = findProteinSeq(geneID, fasta, avgLen)
+
 % The function returns a protein sequence from fasta file. If the ID is not
 % found, return an average-lengthed 'ZZZZZZZZ' seq
 

@@ -6,7 +6,7 @@
   <meta name="keywords" content="minimalGenome">
   <meta name="description" content="Finding a minimal cell by shutting down as many protein exchanges as">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  <meta name="generator" content="m2html &copy; 2003-2019 Guillaume Flandin">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
   <meta name="robots" content="index, follow">
   <link type="text/css" rel="stylesheet" href="../m2html.css">
 </head>
@@ -24,7 +24,7 @@
 <div class="box"><strong>Finding a minimal cell by shutting down as many protein exchanges as</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
-<div class="box"><strong>function [model_min,KOList] = minimalGenome(model,percentOri,protectList) </strong></div>
+<div class="box"><strong>function [model_min,KOList] = minimalGenome(model,optPerc,protectList) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
 <div class="fragment"><pre class="comment"> Finding a minimal cell by shutting down as many protein exchanges as
@@ -33,19 +33,19 @@
  
  USAGE:
  
-   model_min = findMinimalCell(model_pc,0.5);
+   model_min = minimalGenome(model_pc,0.5);
  
  INPUTS:
  
    model:       A PC-model produced by function pcModel.m or preferably
                 refined by adjustStoichAndKeff.m
-   percentOri:  
+   optPerc:     The fraction of wildtype growth rate retained
    protectList: List of proteins mets that are protected from deletion
  
  OUTPUTS:
  
-   model_min:
-   KOList:</pre></div>
+   model_min: New PC-model with as many protein shutdown as possible
+   KOList: The list of shutted down proteins</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
@@ -60,6 +60,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Wed 02-Aug-2023 12:26:43 by <strong><a href="https://github.com/gllmflndn/m2html">m2html</a></strong> &copy; 2003-2022</address>
+<hr><address>Generated on Sun 06-Aug-2023 03:00:39 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

@@ -1,4 +1,5 @@
 function enzymeString = parseGeneRule(ruleString)
+
 % This function parse model.rules{i} into a array of all possible enzymes
 
 ruleString = erase(ruleString,' '); % Remove all spaces

@@ -1,4 +1,5 @@
 function FBAsols = proteinTween(model,FBAsol_init,objRxn,nSteps)
+
 % proteinTween finds the path from a certain solution to optima in nSteps.
 % This is accomplished by tightly constraint the model's proteome to the
 % previous step's solution and allows only a certain 'budget' of total 

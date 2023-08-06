@@ -1,11 +1,11 @@
 function models = implementProteinConstraints(model,QPsols,waiverList,s)
+
 % This function implements QP solutions to a PC-model.
 % It produces a N*1 structure contains context-specific PC-models
 % 
 % USAGE:
 % 
-%   models = implementProteinConstraints(model_pc,QPsols,...
-%            {'EX_protein_s0001'},0.03);
+%   models = implementProteinConstraints(model_pc,QPsols,{'EX_protein_s0001'},0.03);
 % 
 % INPUTS:
 % 

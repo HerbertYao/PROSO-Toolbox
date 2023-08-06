@@ -1,4 +1,5 @@
 function [MOPAsol,FBAsol_wt,FBAsol_mut] = MOPA(model,KOGene)
+
 % MOPA finds a solution of a mutation strain closest to the old optima. 
 % Adapted from minimization of metabolic ajustment (MOMA), minimization of
 % proteomic adjustment (MOPA) can find the sub-optimal solution when a cell

@@ -1,8 +1,9 @@
 function [dFBAsol,substrateProfile,biomassProfile,model_new] = pcDynamicFBA(model,timeInt,bmIdx,initBM,substrateList,substrateConc,rbScale,model_ino)
-%%
-% Dynamic FBA with protein-constrain model. Principals are the same as
-% regular dynamicFBA, but with extra consideration over the total protein
-% weight as well as the maximum ribosome allocation.
+
+% Dynamic FBA with ribosomal PC-model. 
+% Principals are the same as regular dynamicFBA, but with extra 
+% consideration over the total protein weight as well as the maximum 
+% ribosome allocation.
 % 
 % USAGE:
 % 

@@ -6,7 +6,7 @@ function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM
 % 
 % USAGE:
 % 
-%   new_model = proteinConstraintModel(model,'Paeruginosa.fasta',550);
+%   new_model = proteinConstraintModel(model,'Paeruginosa.fasta',150);
 % 
 % INPUTS:
 % 
@@ -21,11 +21,11 @@ function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM
 % OPTIONAL INPUTS:
 % 
 %   maxWeightFrac: A double denotes the maximum weight fraction of total
-%                  protein components, in mg/gDW. Default = 550mg/gDW
+%                  protein components, in mg/gDW. Default = 150mg/gDW
 %   keff_refTable: A n*2 cell array with enzyme ID in the first column and
 %                  keff value in the second column, unit in 1/h. Enzymes 
 %                  not found in this table will be assigned keff = 234000
-%                  (NOT YET FINISHED)
+%                  % TODO %
 % 
 % OUTPUTS:
 % 
@@ -72,7 +72,7 @@ if ~exist('maxWeightFrac','var')
 elseif maxWeightFrac > 500
     warning('Maximum proteome weight fraction is over 50%.\n');
     
-elseif maxWeightFrac < 5
+elseif maxWeightFrac < 50
     warning('Maximum proteome weight fraction is under 5%.\n');
 end
 

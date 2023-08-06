@@ -1,4 +1,5 @@
 function [v1,v2] = drawSolutionEnvelope(model,rxnId1,rxnId2,NSteps,drawFlag,rxnWgt1,rxnWgt2)
+
 % This function draws a 2d production envelope
 % 
 % USAGE:
@@ -12,8 +13,8 @@ function [v1,v2] = drawSolutionEnvelope(model,rxnId1,rxnId2,NSteps,drawFlag,rxnW
 %   rxnId2:   The second rxn of interests
 %   NSteps:   Number of points taken between v1_max and v1_min
 %   drawFlag: If the function plot a figure
-%   rxnWgt1:  TODO
-%   rxnWgt2:  TODO
+%   rxnWgt1:  % TODO %
+%   rxnWgt2:  % TODO %
 % 
 % OUTPUTS:
 % 
