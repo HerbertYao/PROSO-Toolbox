@@ -323,6 +323,9 @@ figure;
 hold on;
 plot3([MOPAsol.full(rxnIdx.biomass),FBAsols(rxnIdx.biomass,:)],...
     [MOPAsol.full(rxnIdx.EX_succ),FBAsols(rxnIdx.EX_succ,:)],sc_p(2:end,1),'o-','LineWidth',2);
+plot3([FBAsol_wt.v(rxnIdx.biomass),MOPAsol.full(rxnIdx.biomass)],...
+    [FBAsol_wt.v(rxnIdx.EX_succ),MOPAsol.full(rxnIdx.EX_succ)],[sc_p(1,1),sc_p(2,1)],'o-','LineWidth',2)
+
 plot3(FBAsol_wt.v(rxnIdx.biomass),FBAsol_wt.v(rxnIdx.EX_succ),sc_p(1,1),'*','MarkerSize',15);
 plot3(FBAsols(rxnIdx.biomass,end),FBAsols(rxnIdx.EX_succ,end),sc_p(end,1),'*','MarkerSize',15);
 plot3(MOPAsol.full(rxnIdx.biomass),MOPAsol.full(rxnIdx.EX_succ),sc_p(2,1),'*','MarkerSize',15);
@@ -331,12 +334,13 @@ plot3(v1_wt,v2_wt,min(sc_p(:,1))*ones(length(v1_wt),1),'--','LineWidth',2);
 plot3(v1_mt,v2_mt,min(sc_p(:,1))*ones(length(v1_mt),1),'--','LineWidth',2);
 
 hold off;
-legend({'migrating route','WT optimum point','mutant strain optimum point',...
+legend({'migrating route','upon mutation','WT optimum point','mutant strain optimum point',...
     'MOPA point','WT production envelope','mutant strain production envelope'});
 xlabel('Growth Rate');
 zlabel('Proteome PC 1');
 ylabel('Succ Production');
 grid on;
+view(30,45);
 
 %% PC-Dynamic FBA
 
