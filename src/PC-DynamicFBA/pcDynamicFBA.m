@@ -1,5 +1,5 @@
-function [dFBAsol,substrateProfile,biomassProfile,model_new]...
-    = pcDynamicFBA(model,timeInt,bmIdx,initBM,substrateList,substrateConc,riboBudget,model_ino)
+function [dFBAsol,substrateProfile,biomassProfile]...
+    = pcDynamicFBA(model,timeInt,bmIdx,initBM,substrateList,substrateConc,riboBudget,FBAsol_ino)
 
 % Dynamic FBA with ribosomal PC-model
 % 
@@ -13,7 +13,7 @@ function [dFBAsol,substrateProfile,biomassProfile,model_new]...
 % 
 % USAGE:
 % 
-%   dFBAsol = pcDynamicFBA(pc_model,[0:1/60:1],1,{'EX_glc__D_e'},10,10000);
+%   dFBAsol = pcDynamicFBA(model,timeInt,bmIdx,initBM,substrateList,substrateConc,riboBudget,FBAsol_ino);
 % 
 % INPUTS:
 % 
@@ -87,71 +87,28 @@ rxnLen = length(model.rxns);
 %% Step 1: Proceeding the first iteration for initial protein level
 
 % Parse lists of protein from model
-exProteinIdx = find(contains(model.rxns,'EX_protein_'));
+ExProteinIdx = find(contains(model.rxns,'EX_protein_'));
 proteinIdx = find(contains(model.mets,'protein_'));
 
-if length(exProteinIdx) ~= length(proteinIdx)
+if length(ExProteinIdx) ~= length(proteinIdx)
     error('Number of proteins must equal to number of protein exchange reactions in PC model');
 end
 
 % Calculate and Record the initial protein allocation
-if ~exist('model_ino','var')
-    FBAsol = optimizeCbModel(model,'max');
-    proteinConc0 = -FBAsol.v(exProteinIdx);
-else
-    FBAsol = optimizeCbModel(model_ino,'max');
-    proteinConc0 = -FBAsol.v(exProteinIdx);
+if ~exist('FBAsol_ino','var')
+    FBAsol_ino = optimizeCbModel(model,'max');
 end
 
 %% Step 2: Adding ribosomal constraint to model
 
-% Need only a universal ribosome metabolite
-model = addMetabolite(model,'ribosome','metName','ribosome resouces',...
-    'b',1,'csense','L');
-
-% Adding two new sets of constraints, proteinLB_ and proteinUB_
-for i = 1:length(proteinIdx)
-    model = addMetabolite(model,['proteinLB_',erase(model.mets{proteinIdx(i)},'protein_')],...
-        'b',proteinConc0(i),'csense','G');
-end
-
-for i = 1:length(proteinIdx)
-    model = addMetabolite(model,['proteinUB_',erase(model.mets{proteinIdx(i)},'protein_')],...
-        'b',proteinConc0(i),'csense','L');
-end
-
-% Record their index
-proteinLBIdx = find(contains(model.mets,'proteinLB_'));
-proteinUBIdx = find(contains(model.mets,'proteinUB_'));
-
-% Adding proteinLB and proteinUB to respective EX_protein rxns
-for i = 1:length(proteinLBIdx)
-    model.S(proteinLBIdx(i),exProteinIdx(i)) = -1;
-    model.S(proteinUBIdx(i),exProteinIdx(i)) = -1;
-end
-
-% Implementing ribosome allocation to proteinLB and proteinUB
-% In the form of ribAlloc
-% THIS PART IS STILL TO BE FINISHED...CURRENTLY USABLE BUT VERY COARSE
-
-proteinWCIdx = find(strcmp(model.mets,'proteinWC')); % for calculating dp
-
-for i = 1:length(proteinIdx)
-    
-    dp = -model.S(proteinWCIdx,exProteinIdx(i))/riboBudget; % FOR NOW USING SAME SCALE AS PROTEIN MW
-    model = addReaction(model,['ribAlloc_',erase(model.mets{proteinIdx(i)},'protein_')],...
-        'metaboliteList',{model.mets{proteinLBIdx(i)},model.mets{proteinUBIdx(i)},'ribosome'},...
-        'stoichCoeffList',[1,-1,dp],...
-        'reversible',false);
-end
-
-% Model setup completed
+model = formulateRibosomalPCModel(model,riboBudget);
+model = updateRiboPCModel(model,FBAsol_ino);
 
 %% Step 3: Conducting dynamicFBA
 
 % Configurate outputs
-substrateProfile = zeros(length(substrateList),length(timeInt));
 dFBAsol = zeros(rxnLen,length(timeInt));
+substrateProfile = zeros(length(substrateList),length(timeInt));
 biomassProfile = zeros(1,length(timeInt));
 
 substrateProfile(:,1) = substrateConc;
@@ -204,14 +161,9 @@ for i = 1:length(timeInt)-1
         end
         
 %       Update all proteinUB_ and proteinLB_
-        for j = 1:length(proteinLBIdx)
-            model.b(proteinLBIdx(j)) = -FBAsol.v(exProteinIdx(j));
-            model.b(proteinUBIdx(j)) = -FBAsol.v(exProteinIdx(j));
-        end
+        model = updateRiboPCModel(model,FBAsol);
     end
     
 end
-
-model_new = model; % for debugging
 
 end

@@ -254,7 +254,7 @@ drawSolutionEnvelope([{model_pc_ori},models_sol],...
 % short-term behavior of the modified strain may appear to be sub-optimal,
 % because the cell is still operating around the old operating point. 
 % 
-% Let's use the PC-OptKnock K = 1+1+1 result as an example, note that these
+% Let's use the PC-OptKnock K = 1+1 result as an example, note that these
 % are the knockouts from that tutorial section:
 
 % KOProteins = {'EX_protein_YPR002W','EX_protein_Q0250','EX_protein_YBR196C','EX_protein_YKL029C'};
@@ -351,7 +351,71 @@ view(30,45);
 
 %% PC-Dynamic FBA
 
-% TODO %
+% PC-DynamicFBA is based on the idea of the original dynamicFBA: integrate
+% dilution reaction fluxes over time to simulate the outcome of a
+% fermentation. Noticeably, PC-model can provide a unique advantage over
+% M-model in this case due to its quantitative proteome. 
+
+% Let's use the PC-OptKnock K = 1+1+1+1 result as an example. 
+% Tracked Substrates (initial concentration):
+%   - glucose (6 mol/L)
+%   - fructose (3 mol/L)
+% Tracked Products (initial concentration):
+%   - biomass (1 gDW/L)
+%   - succinate (0.01 mol/L)
+
+model_dfba = models_sol{4};
+model_dfba = changeRxnBounds(model_dfba,'EX_fru_e',-1000,'l');
+tInt = [0:0.1:10]';
+
+[~,substrateProfL,biomassProfL]...
+    = pcDynamicFBA(model_dfba,tInt,find(model_pc_ori.c),1,...
+    {'EX_glc__D_e','EX_fru_e','EX_succ_e'},[6,3,0],5);
+
+% Noticeably, the riboBudget is an interesting part of PC-dynamicFBA.
+% Increasing riboBudget will allow much faster protein reallocation, and
+% therefore allowing the cell to shift from one state to another rapidly.
+
+[~,substrateProfH,biomassProfH]...
+    = pcDynamicFBA(model_dfba,tInt,find(model_pc_ori.c),1,...
+    {'EX_glc__D_e','EX_fru_e','EX_succ_e'},[6,3,0],100);
+
+% Plot results
+
+figure;
+subplot(2,1,1);
+yyaxis left;
+hold on;
+plot(tInt,substrateProfL(1,:),'LineWidth',3);
+plot(tInt,substrateProfL(2,:),'--','LineWidth',3);
+plot(tInt,substrateProfL(3,:),':','LineWidth',3);
+hold off;
+% set(gca,'YScale','log');
+xlabel('time elapse (hr)');
+ylabel('Concentration (mol/L)');
+yyaxis right;
+plot(tInt,biomassProfL,'LineWidth',3);
+% set(gca,'YScale','log');
+ylabel('Biomass (gDW/L)');
+legend({'glucose','fructose','succinate','biomass'},'Location','best');
+title('Low RiboBudget');
+
+subplot(2,1,2);
+yyaxis left;
+hold on;
+plot(tInt,substrateProfH(1,:),'LineWidth',3);
+plot(tInt,substrateProfH(2,:),'--','LineWidth',3);
+plot(tInt,substrateProfH(3,:),':','LineWidth',3);
+hold off;
+% set(gca,'YScale','log');
+xlabel('time elapse (hr)');
+ylabel('Concentration (mol/L)');
+yyaxis right;
+plot(tInt,biomassProfH,'LineWidth',3);
+% set(gca,'YScale','log');
+ylabel('Biomass (gDW/L)');
+legend({'glucose','fructose','succinate','biomass'},'Location','best');
+title('High RiboBudget');
 
 %% minimalGenome
 
