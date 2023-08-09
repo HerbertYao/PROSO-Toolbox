@@ -238,6 +238,13 @@ drawSolutionEnvelope(models_sol{4},model_pc_ori.rxns{rxnIdx.biomass},model_pc_or
 % resources, although it can guarantee to reach a global optima, of which
 % in this case we don't neccesarily need to achieve anyway.
 
+% Put all results into one plot
+
+drawSolutionEnvelope([{model_pc_ori},models_sol],...
+    model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},...
+    20,true,...
+    {'WT','K = 1','K = 1+1','K = 1+1+1','K = 1+1+1+1'});
+
 %% MOPA
 
 % The algorithm of MOPA (minimization of proteome adjustment) is adapted 

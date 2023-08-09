@@ -27,6 +27,7 @@ addpath([pth,'src/PC-FBA/']);
 addpath([pth,'src/MOPA/']);
 addpath([pth,'src/OVERLAY/']);
 addpath([pth,'src/PC-OptKnock/']);
+addpath([pth,'src/PC-DynamicFBA/']);
 addpath([pth,'src/Utilities/']);
 
 if ~isempty(lastwarn())

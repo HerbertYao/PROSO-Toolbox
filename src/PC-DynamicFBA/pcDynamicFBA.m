@@ -1,9 +1,15 @@
-function [dFBAsol,substrateProfile,biomassProfile,model_new] = pcDynamicFBA(model,timeInt,bmIdx,initBM,substrateList,substrateConc,rbScale,model_ino)
+function [dFBAsol,substrateProfile,biomassProfile,model_new]...
+    = pcDynamicFBA(model,timeInt,bmIdx,initBM,substrateList,substrateConc,riboBudget,model_ino)
 
-% Dynamic FBA with ribosomal PC-model. 
-% Principals are the same as regular dynamicFBA, but with extra 
+% Dynamic FBA with ribosomal PC-model
+% 
+% PC-Dynamic FBA has has similar principals to dynamicFBA, but with extra 
 % consideration over the total protein weight as well as the maximum 
-% ribosome allocation.
+% ribosome allocation. 
+% Note there are multiple ways to set up PC-DynamicFBA, each with some
+% limitations. This is more of a demonstration for how the user can set it
+% up. Please feel free to develop your own version if it does not fit your
+% need. 
 % 
 % USAGE:
 % 
@@ -42,6 +48,7 @@ function [dFBAsol,substrateProfile,biomassProfile,model_new] = pcDynamicFBA(mode
 %                     [length(substrateList) x length(timeInt)]
 %   biomassProfile:   Biomass as a function of time
 %                     [1 x length(timeInt)]
+% 
 
 %% Step 0: Checking inputs
 
@@ -131,7 +138,7 @@ proteinWCIdx = find(strcmp(model.mets,'proteinWC')); % for calculating dp
 
 for i = 1:length(proteinIdx)
     
-    dp = -model.S(proteinWCIdx,exProteinIdx(i))/rbScale; % FOR NOW USING SAME SCALE AS PROTEIN MW
+    dp = -model.S(proteinWCIdx,exProteinIdx(i))/riboBudget; % FOR NOW USING SAME SCALE AS PROTEIN MW
     model = addReaction(model,['ribAlloc_',erase(model.mets{proteinIdx(i)},'protein_')],...
         'metaboliteList',{model.mets{proteinLBIdx(i)},model.mets{proteinUBIdx(i)},'ribosome'},...
         'stoichCoeffList',[1,-1,dp],...
