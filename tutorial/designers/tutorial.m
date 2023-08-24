@@ -395,9 +395,9 @@ xlabel('time elapse (hr)');
 ylabel('Concentration (mol/L)');
 yyaxis right;
 plot(tInt,biomassProfL,'LineWidth',3);
-% set(gca,'YScale','log');
+set(gca,'YLim',[0,120]);
 ylabel('Biomass (gDW/L)');
-legend({'glucose','fructose','succinate','biomass'},'Location','best');
+legend({'glucose','fructose','succinate','biomass'},'Location','northwest');
 title('Low RiboBudget');
 
 subplot(2,1,2);
@@ -412,9 +412,9 @@ xlabel('time elapse (hr)');
 ylabel('Concentration (mol/L)');
 yyaxis right;
 plot(tInt,biomassProfH,'LineWidth',3);
-% set(gca,'YScale','log');
+set(gca,'YLim',[0,120]);
 ylabel('Biomass (gDW/L)');
-legend({'glucose','fructose','succinate','biomass'},'Location','best');
+legend({'glucose','fructose','succinate','biomass'},'Location','northwest');
 title('High RiboBudget');
 
 %% minimalGenome
