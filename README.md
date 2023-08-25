@@ -4,9 +4,6 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/QCSB/OVERLAY-Toolbox">
-    <img src="img/logo.png" alt="Logo" width="600" height="600">
-  </a>
 
   <h3 align="center">OVERLAY</h3>
 
@@ -51,8 +48,12 @@
 
 OVERLAY is a collection of functions used to process, interpret, and study cellular multi-omics data under the scope of genome-scale modelling (GEM).
 
+<a href="https://github.com/QCSB/OVERLAY-Toolbox">
+  <img src="img/logo.png" alt="Logo" width="600" height="600">
+</a>
+
 What OVERLAY offers:
-* Automatic implementing protein-constraints to any genome-scale metabolic model (M-model)
+* Automatic implementing protein constraints to any genome-scale metabolic model (M-model)
 * System-level enzymatic constant estimation
 * Incorporating gene expression data onto GEM for context-specific modelling
 * Suggesting synthetic biology strategies for biotechnology, infectious disease, cancer research, and more
