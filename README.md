@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/QCSB/OVERLAY-Toolbox">
-    <img src="img/logo.png" alt="Logo" width="80" height="80">
+    <img src="img/logo.png" alt="Logo" width="600" height="600">
   </a>
 
   <h3 align="center">OVERLAY</h3>
