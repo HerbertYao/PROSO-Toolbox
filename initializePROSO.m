@@ -1,9 +1,9 @@
-function initializeOVERLAY()
+function initializePROSO()
 
-% Initialization and set up OVERLAY Toolbox
+% Initialization and set up PROSO Toolbox
 
 fprintf('============================\n');
-fprintf('   OVERLAY Toolbox v2.0.0   \n');
+fprintf('   PROSO Toolbox v1.0.0   \n');
 fprintf('============================\n');
 
 % Check availability of COBRA Toolbox
@@ -19,7 +19,7 @@ end
 
 % Add src to path and check the integrity of the file structure
 lastwarn('','');
-pth = erase(which('initializeOVERLAY.m'),'initializeOVERLAY.m');
+pth = erase(which('initializePROSO.m'),'initializePROSO.m');
 
 addpath(pth);
 addpath([pth,'src/']);
@@ -31,7 +31,7 @@ addpath([pth,'src/PC-DynamicFBA/']);
 addpath([pth,'src/Utilities/']);
 
 if ~isempty(lastwarn())
-    error('OVERLAY Toolbox integrity problem');
+    error('PROSO Toolbox integrity problem');
 end
 
 end
