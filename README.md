@@ -5,7 +5,7 @@
 <br />
 <div align="center">
 
-  <h3 align="center">OVERLAY</h3>
+  <h3 align="center">PROSO Toolbox</h3>
 
   <p align="center">
     A Computational Toolbox for Context-Specific Genome-Scale Modelling
@@ -25,7 +25,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-overlay">About OVERLAY</a>
+      <a href="#about-proso">About PROSO</a>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -44,21 +44,21 @@
 
 
 
-## About OVERLAY
+## About PROSO
 
-OVERLAY is a collection of functions used to process, interpret, and study cellular multi-omics data under the scope of genome-scale modelling (GEM).
+PROSO Toolbox is a collection of functions used to process, interpret, and study cellular multi-omics data under the scope of genome-scale modelling (GEM).
 
 <a href="https://github.com/QCSB/OVERLAY-Toolbox">
   <img src="img/logo.png" alt="Logo" width="600" height="600">
 </a>
 
-What OVERLAY offers:
+What PROSO Toolbox offers:
 * Automatic implementing protein constraints to any genome-scale metabolic model (M-model)
 * System-level enzymatic constant estimation
 * Incorporating gene expression data onto GEM for context-specific modelling
 * Suggesting synthetic biology strategies for biotechnology, infectious disease, cancer research, and more
 
-More information on OVERLAY's intuition, formulation, and execution is available in <a href=[algae-paper]>our publication</a>. 
+More information on PROSO Toolbox's intuition, formulation, and execution is available in <a href=[algae-paper]>our publication</a>. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -66,7 +66,7 @@ More information on OVERLAY's intuition, formulation, and execution is available
 
 ## Getting Started
 
-OVERLAY can be setup easily as follows. 
+PROSO Toolbox can be setup easily as follows. 
 
 ### Prerequisites
 
@@ -88,9 +88,9 @@ This is an example of how to list things you need to use the software and how to
 
 1. Clone the current repo to your PC
 
-2. In MATLAB command window, add OVERLAY to path
+2. In MATLAB command window, add PROSO directory to path
    ```matlab
-   >> addpath("Path-to-OVERLAY-Folder")
+   >> addpath("Path-to-PROSO-Folder")
    >> savepath
    ```
 
