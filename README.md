@@ -10,12 +10,12 @@
   <p align="center">
     A Computational Toolbox for Context-Specific Genome-Scale Modelling
     <br />
-    <a href="https://github.com/QCSB/OVERLAY-Toolbox/wiki"><strong>Project Wiki »</strong></a>
+    <a href="https://github.com/QCSB/PROSO-Toolbox/wiki"><strong>Project Wiki »</strong></a>
     <br />
-    <a href="https://github.com/QCSB/OVERLAY-Toolbox/issues"><strong>Report Issues »</strong></a>
+    <a href="https://github.com/QCSB/PROSO-Toolbox/issues"><strong>Report Issues »</strong></a>
     <br />
     <br />
-    NOTE: Please always use and refer to <a href="https://github.com/QCSB/OVERLAY-Toolbox"><strong>QCSB Release</strong></a>
+    NOTE: Please always use and refer to <a href="https://github.com/QCSB/PROSO-Toolbox"><strong>QCSB Release</strong></a>
   </p>
 </div>
 
@@ -36,7 +36,7 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#cite-overlay">Cite OVERLAY</a></li>
+    <li><a href="#cite-proso">Cite PROSO</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -48,7 +48,7 @@
 
 PROSO Toolbox is a collection of functions used to process, interpret, and study cellular multi-omics data under the scope of genome-scale modelling (GEM).
 
-<a href="https://github.com/QCSB/OVERLAY-Toolbox">
+<a href="https://github.com/QCSB/PROSO-Toolbox">
   <img src="img/logo.png" alt="Logo" width="600" height="600">
 </a>
 
@@ -104,7 +104,7 @@ This is an example of how to list things you need to use the software and how to
 
 Here we only demonstrate a simple PC-model construction from _Pseudomonas aeruginosa_ M-model. Despite not being context-specific by itself, PC-model is an 'upgraded' M-model and can serve important purposes in research. 
 
-1. Prepare Data or find them under OVERLAY/tutorial. Make sure they are in path or in your working directory: 
+1. Prepare Data or find them under PROSO/tutorial. Make sure they are in path or in your working directory: 
 
     - _P. aeruginosa_ metabolic reconstruction iSD1509 (doi: https://doi.org/10.1101/2021.04.15.439930)
 
@@ -192,7 +192,7 @@ Here we only demonstrate a simple PC-model construction from _Pseudomonas aerugi
     
     The optimal growth rate of PC-model (FBAsol_pc.v) is smaller than the one of M-model (FBAsol.v). In general, PC-FBA better resembles organism's true exponential phase metabolism. 
 
-_These are only the most basic functions. For more examples, please refer to the [Project wiki](https://github.com/QCSB/OVERLAY-Toolbox/wiki)_
+_These are only the most basic functions. For more examples, please refer to the [Project wiki](https://github.com/QCSB/PROSO-Toolbox/wiki)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -200,7 +200,7 @@ _These are only the most basic functions. For more examples, please refer to the
 
 ## Roadmap
 
-OVERLAY is a on-going project with future plans to refine and expand the scope.
+PROSO is a on-going project with future plans to refine and expand the scope.
 
 - [ ] **Version 1.0**
     - [x] Automated PC-model Construction from M-model
@@ -220,7 +220,7 @@ OVERLAY is a on-going project with future plans to refine and expand the scope.
 
 
 
-## Cite OVERLAY
+## Cite PROSO
 
 Please cite our <a href=[algae-paper]>recent publication</a>
 
