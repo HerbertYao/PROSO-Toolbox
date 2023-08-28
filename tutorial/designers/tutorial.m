@@ -125,7 +125,7 @@ model_test = model_ori;
 model_test.lb(idx) = 0;
 model_test.ub(idx) = 0;
 
-drawSolutionEnvelope(model_test,model_ori.rxns{rxnIdx.biomass},model_ori.rxns{rxnIdx.EX_succ},20,true);
+plotProductionEnvelope(model_test,model_ori.rxns{rxnIdx.biomass},model_ori.rxns{rxnIdx.EX_succ},20,true);
 
 % This is equivalent to the original OptKnock
 
@@ -167,7 +167,7 @@ if PCOKsol.x(rxnIdx.EX_succ) > 1e-6
     FBAsol = optimizeCbModel(models_sol{1},'max');
     fprintf('K = %d: EX_succ_e = %.2f, mu = %.2f\n',K_init,FBAsol.v(rxnIdx.EX_succ),FBAsol.v(rxnIdx.biomass));
     fprintf('Closed proteins: %s\n',model_pc_ori.rxns{idx(1)});
-    drawSolutionEnvelope(models_sol{1},model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},20,true);
+    plotProductionEnvelope(models_sol{1},model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},20,true);
 else
     error('No growth coupling solution found by PC-OptKnock. Please consider increase K');
 end
@@ -197,7 +197,7 @@ models_sol{2}.ub(idx) = 0;
 FBAsol = optimizeCbModel(models_sol{2},'max');
 fprintf('K = %d+1: EX_succ_e = %.2f, mu = %.2f\n',K_init,FBAsol.v(rxnIdx.EX_succ),FBAsol.v(rxnIdx.biomass));
 fprintf('Closed proteins: %s, %s\n',model_pc_ori.rxns{idx(1)},model_pc_ori.rxns{idx(2)});
-drawSolutionEnvelope(models_sol{2},model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},20,true);
+plotProductionEnvelope(models_sol{2},model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},20,true);
 
 % And then K = 1+1+1: 
 
@@ -213,7 +213,7 @@ models_sol{3}.ub(idx) = 0;
 FBAsol = optimizeCbModel(models_sol{3},'max');
 fprintf('K = %d+1+1: EX_succ_e = %.2f, mu = %.2f\n',K_init,FBAsol.v(rxnIdx.EX_succ),FBAsol.v(rxnIdx.biomass));
 fprintf('Closed proteins: %s, %s, %s\n',model_pc_ori.rxns{idx(1)},model_pc_ori.rxns{idx(2)},model_pc_ori.rxns{idx(3)});
-drawSolutionEnvelope(models_sol{3},model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},20,true);
+plotProductionEnvelope(models_sol{3},model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},20,true);
 
 % And then K = 1+1+1+1: 
 
@@ -230,7 +230,7 @@ FBAsol = optimizeCbModel(models_sol{4},'max');
 fprintf('K = %d+1+1+1: EX_succ_e = %.2f, mu = %.2f\n',K_init,FBAsol.v(rxnIdx.EX_succ),FBAsol.v(rxnIdx.biomass));
 fprintf('Closed proteins: %s, %s, %s, %s\n',...
     model_pc_ori.rxns{idx(1)},model_pc_ori.rxns{idx(2)},model_pc_ori.rxns{idx(3)},model_pc_ori.rxns{idx(4)});
-drawSolutionEnvelope(models_sol{4},model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},20,true);
+plotProductionEnvelope(models_sol{4},model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},20,true);
 
 % As you can see, we could keep stacking up with minor computational effort
 % and achieve much better growth-coupling strain. 
@@ -240,7 +240,7 @@ drawSolutionEnvelope(models_sol{4},model_pc_ori.rxns{rxnIdx.biomass},model_pc_or
 
 % Put all results into one plot
 
-drawSolutionEnvelope([{model_pc_ori},models_sol],...
+plotProductionEnvelope([{model_pc_ori},models_sol],...
     model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},...
     20,true,...
     {'WT','K = 1','K = 1+1','K = 1+1+1','K = 1+1+1+1'});
@@ -284,9 +284,9 @@ FBAsols = proteinTween(models_sol{2},MOPAsol,'BIOMASS_SC5_notrace',20);
 [coef_p,sc_p,~,~,exp_p] = pca([FBAsol_wt.v(proteinExIdx),MOPAsol.full(proteinExIdx),FBAsols(proteinExIdx,:)]');
 
 % Also plot the production envelope for reference
-[v1_wt,v2_wt] = drawSolutionEnvelope(model_pc_ori,...
+[v1_wt,v2_wt] = plotProductionEnvelope(model_pc_ori,...
     model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},20,false);
-[v1_mt,v2_mt] = drawSolutionEnvelope(models_sol{2},...
+[v1_mt,v2_mt] = plotProductionEnvelope(models_sol{2},...
     models_sol{2}.rxns{rxnIdx.biomass},models_sol{2}.rxns{rxnIdx.EX_succ},20,false);
 
 % Plot the manifold
