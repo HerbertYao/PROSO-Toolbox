@@ -222,7 +222,10 @@ PROSO is a on-going project with future plans to refine and expand the scope.
 
 ## Cite PROSO
 
-Please cite our <a href=[algae-paper]>recent publication</a>
+Please cite our latest publications:
+
+- Yao, H., Dahal, S., & Yang, L. (2023). Novel context-specific genome-scale modelling explores the potential of triacylglycerol production by Chlamydomonas reinhardtii. _Microbial Cell Factories_, 22(1), 1-16.
+- Yao, H., & Yang, L. (2023). PROSO Toolbox: a unified protein-constrained genome-scale modelling framework for strain designing and optimization. _arXiv preprint arXiv:2308.14869_.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -241,6 +244,8 @@ work-in-progress
 ## Contact
 
 Herbert Yao - 16hy16@queensu.ca
+
+Laurence Yang - laurence.yang@queensu.ca
 
 <a href="https://biosyscompute.com/index">Queen's Computational Systems Biology Group</a>, Department of Chemical Engineering, Queen's University at Kingston, Canada
 
