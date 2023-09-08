@@ -9,7 +9,7 @@ function [v1,v2] = plotProductionEnvelope(models,rxnId1,rxnId2,NSteps,plotFlag,l
 % 
 % INPUTS:
 % 
-%   models:    A PC-model formulated by function pcModel.m
+%   models:   A PC-model formulated by function pcModel.m
 %   rxnId1:   The first rxn of interests
 %   rxnId2:   The second rxn of interests
 %   NSteps:   Number of points taken between v1_max and v1_min
