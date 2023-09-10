@@ -2,9 +2,9 @@
                 "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html>
 <head>
-  <title>Description of drawSolutionEnvelope</title>
-  <meta name="keywords" content="drawSolutionEnvelope">
-  <meta name="description" content="This function draws a 2d production envelope">
+  <title>Description of plotProductionEnvelope</title>
+  <meta name="keywords" content="plotProductionEnvelope">
+  <meta name="description" content="This function draws a 2d production envelope for each PC-model">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -12,40 +12,43 @@
 </head>
 <body>
 <a name="_top"></a>
-<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">src</a> &gt; <a href="index.html">MOPA</a> &gt; drawSolutionEnvelope.m</div>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">src</a> &gt; <a href="index.html">Utilities</a> &gt; plotProductionEnvelope.m</div>
 
 <!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
-<td align="right"><a href="index.html">Index for src/MOPA&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+<td align="right"><a href="index.html">Index for src/Utilities&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
 
-<h1>drawSolutionEnvelope
+<h1>plotProductionEnvelope
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>This function draws a 2d production envelope</strong></div>
+<div class="box"><strong>This function draws a 2d production envelope for each PC-model</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function [v1,v2] = drawSolutionEnvelope(model,rxnId1,rxnId2,NSteps,drawFlag,rxnWgt1,rxnWgt2) </strong></div>
+<div class="box"><strong>function [v1,v2] = plotProductionEnvelope(models,rxnId1,rxnId2,NSteps,plotFlag,lgd,rxnWgt1,rxnWgt2) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> This function draws a 2d production envelope
+<div class="fragment"><pre class="comment"> This function draws a 2d production envelope for each PC-model
  
  USAGE:
  
-   drawSolutionEnvelope(model_pc,'BIOMASS_SC5_notrace','EX_succ_e',20,true);
+   plotProductionEnvelope(model_pc,'BIOMASS_SC5_notrace','EX_succ_e',20,true);
+   plotProductionEnvelope(models,'BIOMASS_SC5_notrace','EX_succ_e',20,true);
  
  INPUTS:
  
-   model:    A PC-model formulated by function pcModel.m
+   models:   A PC-model formulated by function pcModel.m
    rxnId1:   The first rxn of interests
    rxnId2:   The second rxn of interests
    NSteps:   Number of points taken between v1_max and v1_min
    drawFlag: If the function plot a figure
+   Lgd:      Legend for the plot. Must has the same length as models
    rxnWgt1:  % TODO %
    rxnWgt2:  % TODO %
  
  OUTPUTS:
  
-   FBAsols: A matrix with every ribosomal PC-FBA solutions.</pre></div>
+   v1: Flux vector for rxnId1
+   v2: Flux vector for rxnId2</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -60,6 +63,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Tue 08-Aug-2023 13:45:31 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 10-Sep-2023 13:44:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

@@ -2,9 +2,9 @@
                 "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html>
 <head>
-  <title>Description of findProteinSeq</title>
-  <meta name="keywords" content="findProteinSeq">
-  <meta name="description" content="The function returns a protein sequence from fasta file. If the ID is not">
+  <title>Description of gb2faa</title>
+  <meta name="keywords" content="gb2faa">
+  <meta name="description" content="Parse a protein FASTA file from GenBank file">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -12,23 +12,44 @@
 </head>
 <body>
 <a name="_top"></a>
-<div><a href="../../index.html">Home</a> &gt;  <a href="#">src</a> &gt; <a href="index.html">PC-FBA</a> &gt; findProteinSeq.m</div>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">src</a> &gt; <a href="index.html">Utilities</a> &gt; gb2faa.m</div>
 
 <!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
-<td align="right"><a href="index.html">Index for src/PC-FBA&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
+<td align="right"><a href="index.html">Index for src/Utilities&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
 
-<h1>findProteinSeq
+<h1>gb2faa
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>The function returns a protein sequence from fasta file. If the ID is not</strong></div>
+<div class="box"><strong>Parse a protein FASTA file from GenBank file</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function seq = findProteinSeq(geneID, fasta, avgLen) </strong></div>
+<div class="box"><strong>function faa = gb2faa(gbFileName,ifDropNoSeqGene,faaFileName) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> The function returns a protein sequence from fasta file. If the ID is not
- found, return an average-lengthed 'ZZZZZZZZ' seq</pre></div>
+<div class="fragment"><pre class="comment"> Parse a protein FASTA file from GenBank file
+ 
+ USAGE:
+ 
+   gb2faa('GCF_000005845.2_ASM584v2_genomic.gbff.tar',true,...
+       'GCF_000005845.2_ASM584v2');
+ 
+ INPUTS:
+ 
+   gbFileName: Genbank file name. May also include its path
+ 
+ OPTIONAL INPUTS:
+ 
+   ifDropNoSeqGene: if genes without sequence recorded are passed. This is
+                    recommended because faa with empty seq may trigger
+                    errors downstream. Default: true
+   faaFileName:     Output faa file name. Faa file will not be created if
+                    this is left blank
+ 
+ OUTPUTS:
+ 
+   faa: faa output format in N*1 cell. Odd entries are gene headings
+   (attributes) starting with '&gt;', even entries are gene sequences.</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -37,7 +58,7 @@ This function calls:
 </ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="pcModel.html" class="code" title="function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM] = pcModel(model,fasta,maxWeightFrac)">pcModel</a>	(MAIN) Construct a PC-model from M-model</li></ul>
+</ul>
 <!-- crossreference -->
 
 

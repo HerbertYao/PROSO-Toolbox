@@ -4,7 +4,7 @@
 <head>
   <title>Description of plotPCFVASolutions</title>
   <meta name="keywords" content="plotPCFVASolutions">
-  <meta name="description" content="TODO %">
+  <meta name="description" content="Plot PC-FVA results in a compact and easy-to-understand form">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -12,7 +12,7 @@
 </head>
 <body>
 <a name="_top"></a>
-<div><a href="../../index.html">Home</a> &gt;  <a href="../index.html">src</a> &gt; <a href="index.html">OVERLAY</a> &gt; plotPCFVASolutions.m</div>
+<div><a href="../../index.html">Home</a> &gt;  <a href="#">src</a> &gt; <a href="index.html">OVERLAY</a> &gt; plotPCFVASolutions.m</div>
 
 <!--<table width="100%"><tr><td align="left"><a href="../../index.html"><img alt="<" border="0" src="../../left.png">&nbsp;Master index</a></td>
 <td align="right"><a href="index.html">Index for src/OVERLAY&nbsp;<img alt=">" border="0" src="../../right.png"></a></td></tr></table>-->
@@ -21,14 +21,37 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>TODO %</strong></div>
+<div class="box"><strong>Plot PC-FVA results in a compact and easy-to-understand form</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function plotPCFVASolutions(FVAsols,model,rxnList,PltDim,RxnEznUB,clr) </strong></div>
+<div class="box"><strong>function plotPCFVASolutions(FVAsols,model,rxnList,PltDim,FVAsols_enz,clr) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment">  TODO %
- Plot PC-FVA results in a compact and easy-to-understand form</pre></div>
+<div class="fragment"><pre class="comment"> Plot PC-FVA results in a compact and easy-to-understand form
+ 
+ USAGE:
+ 
+   plotPCFVASolutions(FVAsols,model_ori,{'EX_glc__D_e','EX_o2_e'},...
+       [1,2],FVAsols_enz)
+ 
+ INPUTS:
+ 
+   FVAsols: 3d matrix as an output from contextSpecificPCFVA.m
+   model:   Unmodified M-model struct or PC-model struct
+   rxnList: List of metabolic rxns to be plotted
+   PltDim:  The dimension of subplots
+ 
+ OPTIONAL INPUTS:
+ 
+   FVAsols_enz: FVA solution of reaction-specific enzyme level. This will
+                be plotted as black lines. Please consult the tutorial
+                about its format. Default = []
+   clr:         User specified color of the bar plot. Must be in a N*1
+                cell with each entry containing a color. It has a default.
+ 
+ OUTPUTS:
+ 
+   N/A</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -43,6 +66,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Tue 08-Aug-2023 13:45:31 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 10-Sep-2023 13:44:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>
