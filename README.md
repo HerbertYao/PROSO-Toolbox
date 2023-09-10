@@ -233,9 +233,7 @@ Please cite our latest publications:
 
 ## License
 
-work-in-progress
-
-<!-- Distributed under the MIT License. See `LICENSE.txt` for more information. -->
+Distributed under GNU GENERAL PUBLIC LICENSE V3. Please see `LICENSE` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
