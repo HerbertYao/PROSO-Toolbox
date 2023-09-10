@@ -13,9 +13,11 @@ function models = implementProteinConstraints(model,QPsols,waiverList,s)
 %   QPsols:     The QP solution matrix constructed from concatenating
 %               N number of convex QP solutions together. 
 %   waiverList: This waiverList should be the same as used for the QP. 
-%   s:          Universal slack term for the protein constraint. Please
-%               check the tutorial or the publication for more details.
-%               Default: 0.02
+% 
+% OPTIONAL INPUTS:
+% 
+%   s: Universal slack term for the protein constraint. Please check the 
+%      tutorial or the publication for more details. Default: 0.02
 % 
 % OUTPUTS:
 % 

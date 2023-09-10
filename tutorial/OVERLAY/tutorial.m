@@ -15,19 +15,20 @@
 % with this tutorial:
 % 
 %   - Confirm the integrity of OVERLAY Toolbox
-%   - Install Cobra Toolbox.
+%   - Install COBRA Toolbox.
 %   - MATLAB add-ons: Statistics and Machine Learning Toolbox
+%                     Deep Learning Toolbox
 %                     Bioinformatics Toolbox
-%   - Gurobi 9.0 or above to be installed to use Non-convex QP. If you have
+%   - Gurobi 9.0 or above to be installed to use nonconvex QP. If you have
 %     another solver installed (i.e., IBM CPLEX) then please skip that
-%     section. The build-in solver of Cobra Toolbox will not do the trick
+%     section. The build-in solver of COBRA Toolbox will not do the trick
 %     due to the size of the problem, so you need to install some other 
 %     solvers to use OVERLAY.
 
 % Don't forget to take advantage of surfNet function to browse the model.
 
 initCobraToolbox(false);
-initializeOVERLAY();
+initializePROSO();
 changeCobraSolver('gurobi','all',1);
 clc;
 
@@ -676,52 +677,12 @@ xlabel('Spearman ranking \rho');
 % should also plot its enzymatic level. 
 
 rxnList = {'EX_glc__D_e','EX_o2_e','ATPS4rpp','GMHEPPA','NDPK4','BIOMASS_PA14_v27M'};
-rev = [1,1,0,0,0,0];
+clr = {[0.4660 0.6740 0.1880],...
+    [0.9290 0.6940 0.1250],...
+    [0.8500 0.3250 0.0980],...
+    [1 0 0]};
 
-figure;
-FVAsols_plt = FVAsols;
-
-for i = 1:length(rxnList)
-    subplot(2,3,i);
-    yyaxis left;
-    xlabel('Exp No.');
-    ylabel('flux');
-
-    idx = find(strcmp(model_ori.rxns,rxnList{i}));
-    if rev(i) == 1
-        for j = 1:8
-            FVAsols_plt(idx,j,:) = - flip(FVAsols_plt(idx,j,:));
-        end
-    end
-
-    bsv = min(FVAsols_plt(idx,:,1));
-    h1 = bar(1:8,reshape([FVAsols_plt(idx,:,1),FVAsols_plt(idx,:,8)-FVAsols_plt(idx,:,1)],[8,2]),...
-        0.8,'stacked','BaseValue',min(FVAsols_plt(idx,:,1)));
-    h1(1).Visible = 'off';
-    h1(2).FaceColor = [0.4660 0.6740 0.1880];
-    hold on;
-    h2 = bar(1:8,reshape([FVAsols_plt(idx,:,2),FVAsols_plt(idx,:,7)-FVAsols_plt(idx,:,2)],[8,2]),0.65,'stacked');
-    h2(1).Visible = 'off';
-    h2(2).FaceColor = [0.9290 0.6940 0.1250];
-    h3 = bar(1:8,reshape([FVAsols_plt(idx,:,3),FVAsols_plt(idx,:,6)-FVAsols_plt(idx,:,3)],[8,2]),0.5,'stacked');
-    h3(1).Visible = 'off';
-    h3(2).FaceColor = [0.8500 0.3250 0.0980];
-    h4 = bar(1:8,reshape([FVAsols_plt(idx,:,4),FVAsols_plt(idx,:,5)-FVAsols_plt(idx,:,4)],[8,2]),0.35,'stacked');
-    h4(1).Visible = 'off';
-    h4(2).FaceColor = [1 0 0];
-    hold off;
-    ylabel('flux');
-
-    if ~isempty(model_ori.rules{idx})
-        yyaxis right;
-        ylabel('max enzyme abund.');
-        p = plot(FVAsols_enz(idx,:),'-k');
-        p.LineWidth = 2;
-        ylabel('expression');
-    end
-
-    title(rxnList{i},'FontSize',10,'Interpreter','none');
-end
+plotPCFVASolutions(FVAsols,model_ori,rxnList,[2,3],FVAsols_enz,clr);
 
 % From the plotting, we can clearly see the correlation of flux-flux and
 % flux-expression. Glucose and oxygen uptake are vital for P. aeruginosa in
@@ -735,7 +696,7 @@ end
 % in the journal article might be a good starting point for you, which is
 % demonstrated here in fine details. 
 
-clear i j k idx model_alt FBAsol_alt;
+clear i j idx model_alt FBAsol_alt;
 
 %% Epilogue
 

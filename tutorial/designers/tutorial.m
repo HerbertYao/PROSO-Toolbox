@@ -4,7 +4,7 @@
 % OVERLAY/src/Strain-Designer as well as the concepts behind algorithms
 
 initCobraToolbox(false);
-initializeOVERLAY();
+initializePROSO();
 changeCobraSolver('gurobi','all',1);
 clc;
 

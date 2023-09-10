@@ -10,6 +10,9 @@ function [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin,PCBool)
 % INPUTS:
 % 
 %   model:  A PC-model produced by function pcModel.m
+% 
+% OPTIONAL INPUTS:
+% 
 %   numKO:  The maximum number of knocked out allowed. This can be later
 %           changed by changeNumKO. 
 %           Default: 1
