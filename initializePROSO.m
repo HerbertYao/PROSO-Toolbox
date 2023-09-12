@@ -34,4 +34,7 @@ if ~isempty(lastwarn())
     error('PROSO Toolbox integrity problem');
 end
 
+% Run basic tests
+% TODO %
+
 end
