@@ -1,16 +1,19 @@
-% OVERLAY Step-By-Step Tutorial
-
+%% OVERLAY Step-By-Step Tutorial
+%% Author: Herbert Yao
+%% Reviewer: NaN
+% 
+%% INTRODUCTION
+% 
 % This script is meant to provide a detailed and thorough explanation to 
 % how to use OVERLAY and the thought process behind its development.
 % Multiple functions from the toolbox will be featured. 
-
-% Journal paper: https://doi.org/10.1186/s12934-022-02004-y
+% 
 % Please also refer to the journal paper, although it is written in a more
 % high-level and conceptual way. This script will provide more insights on
 % executional side.
-
-%% Prerequisites
-
+% 
+%% MATERIALS
+% 
 % Please make sure the following subjects are completed before proceeding
 % with this tutorial:
 % 
@@ -24,7 +27,7 @@
 %     section. The build-in solver of COBRA Toolbox will not do the trick
 %     due to the size of the problem, so you need to install some other 
 %     solvers to use OVERLAY.
-
+% 
 % Don't forget to take advantage of surfNet function to browse the model.
 
 initCobraToolbox(false);
@@ -32,7 +35,8 @@ initializePROSO();
 changeCobraSolver('gurobi','all',1);
 clc;
 
-%% Load and Examine M-model
+%% PROCEDURE
+% _1. Load and Examine M-model
 
 % In this tutorial, we are using Pseudomonas aeruginosa metabolic
 % reconstruction iSD1509 as an example.
@@ -60,7 +64,7 @@ fprintf('                 oxygen consumption rate: %.3f mmol/gDW/h\n',FBAsol.v(1
 % Note that M-model has a tendency to exhaust all materials given. This is
 % often undesirable and unrealistic simulation. 
 
-%% Construct PC-model
+% _2. Construct PC-model
 
 % Constructing PC-model with OVERLAY toolbox is simple: it only requires an
 % M-model and an appropriate protein FASTA file (.faa). The FASTA file is
@@ -125,7 +129,7 @@ model_pc_ori.b(find(strcmp(model_pc_ori.mets,'proteinWC'))) = 120;
 % can be output explicitly to make them easier to access and understand. 
 
 
-%% Refine PC-model
+% _3. Refine PC-model
 
 % PC-model can be further refined through semi-manual procedures. 
 
@@ -177,7 +181,7 @@ fprintf('          oxygen consumption rate: %.3f mmol/gDW/h\n',FBAsol.v(1285));
 % this simulation, it appears P. aeruginosa prefers glucose over succinate,
 % which is impossible to observe from M-model.
 
-%% Extra understanding of PC-FBA and PC-model
+% _4. Extra understanding of PC-FBA and PC-model
 
 % Apart from common traits of FBA, using FBA on PC-model (or PC-FBA) can
 % also unveil the optimal proteome. Protein abundance vector can be easily
@@ -232,7 +236,7 @@ clear X h b i j v;
 % shut down succ so the cell growth solely on glc for later analysis
 model_pc.lb(1276) = 0;  
 
-%% Prepare RNA-seq data
+% _5. Prepare RNA-seq data
 
 % The key contribution of OVERLAY is to unveil underlying metabolism for a
 % RNA-seq measurement. Let's take a processed RNA-seq dataset as an
@@ -318,7 +322,7 @@ clear i;
 % 
 % For the sake of simplicity, we will stick with option 1 in this tutorial.
 
-%% Non-convex QP for keff tuning
+% _6. Non-convex QP for keff tuning
 
 % You can in fact completely skip this section. Non-convex QP is NOT a must
 % for convex QP or subsequent analyses, although I believe it's better to 
@@ -392,7 +396,7 @@ model_pc_new = updatePCModelKeffByR(model_pc,rValues);
 
 clear clus i idx varlen;
 
-%% Convex QP for context-specific modelling
+% _7. Convex QP for context-specific modelling
 
 % If you skipped non-convex QP, please run in command window:
 % >> model_pc_new = model_pc;
@@ -495,7 +499,7 @@ models = implementProteinConstraints(model_pc,record_QPsol,waiver,0.02);
 
 clear i idx ed d ol ol2 QPsol_cv r2 r2_log stat wt X Y;
 
-%% Debottlenecking
+% _8. Debottlenecking
 
 % There is a practical reason as for why this debottlenecking step exists
 % and happens before PC-FVA. Please check the journal paper for explanation
@@ -554,7 +558,7 @@ clear i j;
 % However, we can dive deep into its capability and bottlenecks using FVA, 
 % and this is what we are going to do. 
 
-%% PC-FVA
+% _9. PC-FVA
 
 % Let's think about each model - it is now tightly constrained (although
 % still has some variability), or in an optimization terms, a polyhedral in
@@ -613,7 +617,7 @@ end
 
 % This enzyme FVA will take much less time to complete.
 
-%% PC-FVA unveils metabolic insights
+% _10. PC-FVA unveils metabolic insights
 
 % There are a lot of information in this FVA result, and there might be
 % multiple methods to interrogate the result according to your objective. 
@@ -698,7 +702,7 @@ plotPCFVASolutions(FVAsols,model_ori,rxnList,[2,3],FVAsols_enz,clr);
 
 clear i j idx model_alt FBAsol_alt;
 
-%% Epilogue
+% _11. Epilogue
 
 % This is a complete showcase of what OVERLAY has to offer to the user
 % based on its design. As you may appreciate, the workflow is very
@@ -718,3 +722,25 @@ clear i j idx model_alt FBAsol_alt;
 % integrating thermodynamic data to OVERLAY. We are whole-heartedly
 % welcoming to anyone who wants to share their opinions and inspirations on
 % this toolbox. 
+
+%% Acknowledgments
+% 
+% This work is supervised by Laurence Yang and developed with the help from
+% Sanjeev Dahal. The author thanks Ziying Wang for her assistance in 
+% testing.
+% 
+%% Reference
+% 
+% _1. Yao, H., Dahal, S. & Yang, L. Novel context-specific genome-scale 
+% modelling explores the potential of triacylglycerol production by 
+% Chlamydomonas reinhardtii. Microb Cell Fact 22, 13 (2023).
+% 
+% _2. Yao, Haoyang, and Laurence Yang. "PROSO Toolbox: a unified protein-
+% constrained genome-scale modelling framework for strain designing and 
+% optimization." arXiv preprint arXiv:2308.14869 (2023).
+% 
+% _3. Yurkovich, James T., Laurence Yang, and Bernhard O. Palsson. 
+% "Systems-level physiology of the human red blood cell is computed from 
+% metabolic and macromolecular mechanisms." bioRxiv (2019): 797258.
+% 
+

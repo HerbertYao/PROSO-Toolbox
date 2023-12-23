@@ -1,14 +1,28 @@
-% Tutorial for Cell Designer Functions
-
+%% Tutorial for Cell Designer Functions
+%% Author: Herbert Yao
+%% Reviewer: NaN
+% 
+%% INTRODUCTION
+% 
 % This script will provide a detailed guide on how to use functions in 
-% OVERLAY/src/Strain-Designer as well as the concepts behind algorithms
+% PROSO-Toolbox/src/Strain-Designer as well as the concepts behind 
+% algorithms
+% 
+%% MATERIALS
+% 
+% - MATLAB
+% - COBRA Toolbox
+% - Gurobi Optimizer v9.1 or later and on COBRA path
+% - PROSO Toolbox
+% 
+%% PROCEDURE
 
 initCobraToolbox(false);
 initializePROSO();
 changeCobraSolver('gurobi','all',1);
 clc;
 
-%% Prepare PC-model
+% _1. Prepare PC-model
 
 % In this tutorial, we will use S. cerevisiae metabolic reconstruction 
 % iMM904 as an example 
@@ -73,7 +87,7 @@ end
 % We will not refine the PC-model here because this is only a showcase for
 % cell designer functions. 
 
-%% PC-OptKnock
+% _2. PC-OptKnock
 
 % PC-OptKnock has identical idea to OptKnock but deals with PC-model. This
 % allows more practical gene-knockout suggestions from the solver. 
@@ -247,7 +261,7 @@ plotProductionEnvelope(...
     20,true,...
     {'WT','K = 1','K = 1+1','K = 1+1+1','K = 1+1+1+1'});
 
-%% MOPA
+% _3. MOPA
 
 % The algorithm of MOPA (minimization of proteome adjustment) is adapted 
 % from MOMA (minimization of metabolic adjustment). This suggests that once
@@ -352,7 +366,7 @@ ylabel('Succ Production');
 grid on;
 view(30,45);
 
-%% PC-Dynamic FBA
+% _4. PC-Dynamic FBA
 
 % PC-DynamicFBA is based on the idea of the original dynamicFBA: integrate
 % dilution reaction fluxes over time to simulate the outcome of a
@@ -420,7 +434,7 @@ ylabel('Biomass (gDW/L)');
 legend({'glucose','fructose','succinate','biomass'},'Location','northwest');
 title('High RiboBudget');
 
-%% minimalGenome
+% _5. minimalGenome
 
 % The minimal genome is an interesting concept in synthetic biology: by
 % reducing the size of the genome while preserving the desired synthetic
@@ -440,3 +454,32 @@ title('High RiboBudget');
 % a certain degree. 
 
 % TODO %
+
+%% Acknowledgments
+% 
+% This work is supervised by Laurence Yang and developed with the help from
+% Sanjeev Dahal. The author thanks Ziying Wang for her assistance in 
+% testing.
+% 
+%% Reference
+% 
+% _1. Yao, H., Dahal, S. & Yang, L. Novel context-specific genome-scale 
+% modelling explores the potential of triacylglycerol production by 
+% Chlamydomonas reinhardtii. Microb Cell Fact 22, 13 (2023).
+% 
+% _2. Yao, Haoyang, and Laurence Yang. "PROSO Toolbox: a unified protein-
+% constrained genome-scale modelling framework for strain designing and 
+% optimization." arXiv preprint arXiv:2308.14869 (2023).
+% 
+% _3. Burgard, Anthony P., Priti Pharkya, and Costas D. Maranas. "Optknock:
+% a bilevel programming framework for identifying gene knockout strategies 
+% for microbial strain optimization." Biotechnology and bioengineering 84.6
+% (2003): 647-657.
+% 
+% _4. Segre, Daniel, Dennis Vitkup, and George M. Church. "Analysis of 
+% optimality in natural and perturbed metabolic networks." Proceedings of 
+% the National Academy of Sciences 99.23 (2002): 15112-15117.
+% 
+% _5. Mahadevan, Radhakrishnan, Jeremy S. Edwards, and Francis J. Doyle. 
+% "Dynamic flux balance analysis of diauxic growth in Escherichia coli." 
+% Biophysical journal 83.3 (2002): 1331-1340.
