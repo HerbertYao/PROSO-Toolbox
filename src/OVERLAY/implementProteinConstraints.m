@@ -37,6 +37,7 @@ else
 end
 
 proteinExIdx = find(startsWith(model_ref.rxns,'EX_protein_'));
+
 [~,w] = size(QPsols);
 
 models = cell(w,1);

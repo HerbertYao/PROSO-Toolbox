@@ -9,7 +9,7 @@ function FVAsols = contextSpecificPCFVA(models_db,rxnList,optPerc,printBool)
 % 
 % INPUTS:
 % 
-%   models_db: M*1 struct contains context-specific PC-model
+%   models_db: M*1 cell contains context-specific PC-model
 %   rxnList:   N*1 cell array with rxn IDs for FVA
 % 
 % OPTIONAL INPUTS:
@@ -28,6 +28,9 @@ if ~exist('optPerc','var')
 end
 if ~exist('printBool','var')
     printBool = true;
+end
+if ~isa(models_db,'cell') && isa(models_db,'struct')
+    models_db = {models_db};
 end
 
 FVAsols = zeros(length(rxnList),length(models_db),length(optPerc)*2);

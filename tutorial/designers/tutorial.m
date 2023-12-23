@@ -173,8 +173,8 @@ else
 end
 
 % In this case, we find a growth-coupling solution with only K = 1, which 
-% is an ideal scenario. If PCOKsol.x(rxnIdx.EX_succ) is almost 0, you should
-% increase K by 1 and re-run this section. 
+% is an ideal scenario. If PCOKsol.x(rxnIdx.EX_succ) is almost 0, you 
+% should increase K by 1 and re-run this section. 
 % 
 % Since we have found a solution, it is attempting to increase the
 % productivity. The most computationally efficient way is to set K = 2 and
@@ -240,8 +240,10 @@ plotProductionEnvelope(models_sol{4},model_pc_ori.rxns{rxnIdx.biomass},model_pc_
 
 % Put all results into one plot
 
-plotProductionEnvelope([{model_pc_ori},models_sol],...
-    model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},...
+plotProductionEnvelope(...
+    [{model_pc_ori},models_sol],...
+    model_pc_ori.rxns{rxnIdx.biomass},...
+    model_pc_ori.rxns{rxnIdx.EX_succ},...
     20,true,...
     {'WT','K = 1','K = 1+1','K = 1+1+1','K = 1+1+1+1'});
 
@@ -284,6 +286,7 @@ FBAsols = proteinTween(models_sol{2},MOPAsol,'BIOMASS_SC5_notrace',20);
 [coef_p,sc_p,~,~,exp_p] = pca([FBAsol_wt.v(proteinExIdx),MOPAsol.full(proteinExIdx),FBAsols(proteinExIdx,:)]');
 
 % Also plot the production envelope for reference
+
 [v1_wt,v2_wt] = plotProductionEnvelope(model_pc_ori,...
     model_pc_ori.rxns{rxnIdx.biomass},model_pc_ori.rxns{rxnIdx.EX_succ},20,false);
 [v1_mt,v2_mt] = plotProductionEnvelope(models_sol{2},...

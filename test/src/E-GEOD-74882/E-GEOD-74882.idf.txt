@@ -1,0 +1,28 @@
+Comment[ArrayExpressAccession]	E-GEOD-74882
+MAGE-TAB Version	1.1		
+Public Release Date	2016-04-01
+Investigation Title	Genome-wide analysis of E.coli response to mitomycin (MMC) treatment in wild type and recN mutant		
+Comment[Submitted Name]	Genome-wide analysis of E.coli response to mitomycin (MMC) treatment in wild type and recN mutant
+Experiment Description	We report the role of recN in the induction of the sos response Examination of gene profiling at two time points after addition of mitomycin (MMC) at 10Âµg/ml		
+Term Source Name	ArrayExpress	EFO
+Term Source File	http://www.ebi.ac.uk/arrayexpress/	http://www.ebi.ac.uk/efo/efo.owl	
+Person Last Name	Espeli	Espeli	Vickridge
+Person First Name	Olivier	Olivier	Elise
+Person Email	olivier.espeli@college-de-france.fr		
+Person Affiliation	College de France		
+Person Phone	33144271249		
+Person Address	CIRB, College de France, 11 place Marcelin Berthelot, Paris, France		
+Person Roles	submitter		
+Protocol Name	P-GSE74882-3	P-GSE74882-2	P-GSE74882-1
+Protocol Description	Basecalls performed using CASAVA-1.8.2 (demultiplexing), Fastqc 0.10.1 (read quality), RNA-seq reads were aligned to the NC_000913 genome assembly using Rockhopper Supplementary_files_format_and_content: mRNA profiling and RKPM were performed with Rockhopper	Genejet RNA purification kit (Thermo) Libraries were prepared according to Illumina's instructions accompanying the TruSeq SBS Kit Transcriptome . Libraries were sequenced on the Genome Analyzer following the manufacturer's protocols.	E. coli K12 MG1655 where grown in minimal medium A supplemented with casaminoacids 0,2% and glucose 0,25% until OD 0.2, treated or not with MMC (10Âµg/ml) for 20 or 40 min. Total RNA where immediatly extracted.
+Protocol Type	normalization data transformation protocol	nucleic acid library construction protocol	growth protocol
+Experimental Factor Name	strain		
+Experimental Factor Type	strain		
+Comment[SecondaryAccession]	GSE74882		
+Comment[GEOReleaseDate]	2016-04-01		
+Comment[ArrayExpressSubmissionDate]	2015-11-10		
+Comment[GEOLastUpdateDate]	2016-04-03		
+Comment[AEExperimentType]	RNA-seq of coding RNA		
+Comment[SecondaryAccession]	SRP066014		
+Comment[SequenceDataURI]	http://www.ebi.ac.uk/ena/data/view/SRR2932231-SRR2932236		
+SDRF File	E-GEOD-74882.sdrf.txt
