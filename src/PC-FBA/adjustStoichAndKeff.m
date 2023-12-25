@@ -4,7 +4,7 @@ function model_adj = adjustStoichAndKeff(model,C_matrix,K_matrix)
 % 
 % USAGE:
 % 
-%   model_adj = adjustStoichAndKeff(model,C_matrix,K_matrix);
+%   model_adj = adjustStoichAndKeff(model,C_matrix,K_matrix)
 % 
 % INPUTS:
 %   model:    A PC model built from the function 'pcModel.m'
@@ -16,7 +16,7 @@ function model_adj = adjustStoichAndKeff(model,C_matrix,K_matrix)
 % OUTPUTS:
 %   model_adj: The adjusted PC model
 % 
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 % Checking input format

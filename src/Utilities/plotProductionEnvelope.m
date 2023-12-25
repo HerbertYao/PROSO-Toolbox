@@ -21,6 +21,8 @@ function [v1,v2] = plotProductionEnvelope(models,rxnId1,rxnId2,NSteps,plotFlag,l
 %   v1: Flux vector for rxnId1
 %   v2: Flux vector for rxnId2
 % 
+% .. AUTHOR: - Herbert Yao, Dec 2023
+% 
 
 if ~exist('rxnWgt1','var')
     rxnWgt1 = 1;

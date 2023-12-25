@@ -5,7 +5,7 @@ function [FBAsol,model_new,relaxProt,relaxLevel] = proteinDebottleneck(model,ptB
 % 
 % USAGE:
 % 
-%   [FBAsol_db, model_db] = proteinDebottleneck(model_pc, 30)
+%   [FBAsol,model_new,relaxProt,relaxLevel] = proteinDebottleneck(model,ptBudget)
 % 
 % INPUTS:
 %   model:    A PC model built from the function 'pcModel.m' with
@@ -19,7 +19,7 @@ function [FBAsol,model_new,relaxProt,relaxLevel] = proteinDebottleneck(model,ptB
 %   relaxProt:  All relaxed proteins in cell array
 %   relaxLevel: The level of protein relaxations in double
 % 
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 model_new = model;

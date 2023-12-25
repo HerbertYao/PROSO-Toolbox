@@ -4,7 +4,7 @@ function model_pc_new = updatePCModelKeffByR(model_pc,rValues)
 % 
 % USAGE:
 % 
-%   model_pc_new = updatePCModelKeffByR(model_pc,rValues);
+%   model_pc_new = updatePCModelKeffByR(model_pc,rValues)
 % 
 % INPUTS:
 % 
@@ -15,7 +15,7 @@ function model_pc_new = updatePCModelKeffByR(model_pc,rValues)
 % 
 %   model_pc_new: PC-model with updated R
 % 
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 model_pc_new = model_pc;

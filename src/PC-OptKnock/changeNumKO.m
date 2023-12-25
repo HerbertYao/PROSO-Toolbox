@@ -18,7 +18,7 @@ function milp = changeNumKO(milp,numKO,forGRB)
 % OUTPUTS:
 %   milp: MILP model struct with updated numKO
 %  
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 yIdx = find(startsWith(milp.varnames,'y_'));

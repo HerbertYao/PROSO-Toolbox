@@ -6,13 +6,17 @@ function enzymeString = parseGeneRule(ruleString)
 % 
 % USAGE:
 %   
-%   enzymeString = parseGeneRule('(((x(105)&x(107))&x(103))|(x(105)&x(107))|(x(105)&x(102))|(x(104)&x(106)))')
+%   enzymeString = parseGeneRule(ruleString)
 % 
 % INPUTS:
 %   ruleString: The string from model.rules{i}
 % 
 % OUTPUTS:
 %   enzymeString: Output string formatted 
+% 
+% EXAMPLE:
+% 
+%   enzymeString = parseGeneRule('(((x(105)&x(107))&x(103))|(x(105)&x(107))|(x(105)&x(102))|(x(104)&x(106)))')
 % 
 % NOTE:
 % 
@@ -22,7 +26,7 @@ function enzymeString = parseGeneRule(ruleString)
 %   fix certain entries in model.rules and please always check if rules are
 %   parsed correctly after using. 
 %  
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 ruleString = erase(ruleString,' '); % Remove all spaces

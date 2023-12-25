@@ -6,7 +6,8 @@ function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM
 % 
 % USAGE:
 % 
-%   new_model = proteinConstraintModel(model,'Paeruginosa.fasta',150);
+%   [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM] = pcModel(model,fasta)
+%   [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM] = pcModel(model,fasta,maxWeightFrac)
 % 
 % INPUTS:
 %   model: A functional COBRA model struct with the field 'genes'
@@ -43,7 +44,7 @@ function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM
 %   concentration of protein_i is -v_{EX_protein_i} and the concentration 
 %   of enzyme_j is v_{EX_enzyme_j} = v_{enzymeForm_enzyme_j}
 %  
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 % -------------------------------------------------------------------------

@@ -4,8 +4,9 @@ function FVAsols = contextSpecificPCFVA(models_db,rxnList,optPerc,printBool)
 % 
 % USAGE:
 %   
-%   rxnList = models_db.rxns(1:1577); % all metabolic rxns
-%   FVAsols = contextSpecificPCFVA(models_db,rxnList,[0,0.5,0.9,0.95]);
+%   FVAsols = contextSpecificPCFVA(models_db,rxnList)
+%   FVAsols = contextSpecificPCFVA(models_db,rxnList,optPerc)
+%   FVAsols = contextSpecificPCFVA(models_db,rxnList,optPerc,printBool)
 % 
 % INPUTS:
 %   models_db: M*1 cell contains context-specific PC-model
@@ -19,7 +20,7 @@ function FVAsols = contextSpecificPCFVA(models_db,rxnList,optPerc,printBool)
 % OUTPUTS:
 %   FVAsols: N * M * 2K matrix as FVA results. 
 % 
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 if ~exist('optPerc','var')

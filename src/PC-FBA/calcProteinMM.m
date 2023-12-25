@@ -5,7 +5,7 @@ function MM = calcProteinMM(seq)
 % 
 % USAGE:
 %   
-%   MM_b0001 = calcProteinMM('MKRISTTITTTITITTGNGAG')
+%   MM = calcProteinMM(seq)
 % 
 % INPUTS:
 %   seq: Protein sequence
@@ -13,7 +13,7 @@ function MM = calcProteinMM(seq)
 % OUTPUTS:
 %   MM: Molar weight of the protein in g/mol
 %  
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 MM = 0;

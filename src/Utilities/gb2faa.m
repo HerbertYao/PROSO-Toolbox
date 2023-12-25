@@ -4,25 +4,30 @@ function faa = gb2faa(gbFileName,ifDropNoSeqGene,faaFileName)
 % 
 % USAGE:
 % 
-%   gb2faa('GCF_000005845.2_ASM584v2_genomic.gbff.tar',true,...
-%       'GCF_000005845.2_ASM584v2');
+%   faa = gb2faa(gbFileName)
+%   faa = gb2faa(gbFileName,ifDropNoSeqGene)
+%   faa = gb2faa(gbFileName,ifDropNoSeqGene,faaFileName)
+%   
 % 
 % INPUTS:
-% 
 %   gbFileName: Genbank file name. May also include its path
 % 
-% OPTIONAL INPUTS:
-% 
+% OPTIONAL INPUTS: 
 %   ifDropNoSeqGene: if genes without sequence recorded are passed. This is
 %                    recommended because faa with empty seq may trigger
 %                    errors downstream. Default: true
 %   faaFileName:     Output faa file name. Faa file will not be created if
 %                    this is left blank
 % 
-% OUTPUTS:
-% 
+% OUTPUTS: 
 %   faa: faa output format in N*1 cell. Odd entries are gene headings
-%   (attributes) starting with '>', even entries are gene sequences. 
+%        (attributes) starting with '>', even entries are gene sequences. 
+% 
+% EXAMPLE:
+% 
+%   faa = gb2faa('GCF_000005845.2_ASM584v2_genomic.gbff.tar',true,'GCF_000005845.2_ASM584v2');
+% 
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 if ~exist('dropNoSeqGene','var')

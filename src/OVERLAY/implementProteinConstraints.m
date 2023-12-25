@@ -5,7 +5,8 @@ function models = implementProteinConstraints(model,QPsols,waiverList,s)
 % 
 % USAGE:
 % 
-%   models = implementProteinConstraints(model_pc,QPsols,{'EX_protein_s0001'},0.03);
+%   models = implementProteinConstraints(model,QPsols,waiverList)
+%   models = implementProteinConstraints(model,QPsols,waiverList,s)
 % 
 % INPUTS:
 %   model:      A PC model built from the function 'pcModel.m'
@@ -20,7 +21,7 @@ function models = implementProteinConstraints(model,QPsols,waiverList,s)
 % OUTPUTS:
 %   models: A N*1 struct containing context-specific PC-models 
 % 
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 % default of slack param

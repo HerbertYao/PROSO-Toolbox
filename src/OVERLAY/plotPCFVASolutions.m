@@ -4,8 +4,8 @@ function plotPCFVASolutions(FVAsols,model,rxnList,PltDim,FVAsols_enz,clr)
 % 
 % USAGE:
 % 
-%   plotPCFVASolutions(FVAsols,model_ori,{'EX_glc__D_e','EX_o2_e'},...
-%       [1,2],FVAsols_enz)
+%   plotPCFVASolutions(FVAsols,model,rxnList,PltDim,FVAsols_enz)
+%   plotPCFVASolutions(FVAsols,model,rxnList,PltDim,FVAsols_enz,clr)
 % 
 % INPUTS:
 %   FVAsols: 3d matrix as an output from contextSpecificPCFVA.m
@@ -23,7 +23,7 @@ function plotPCFVASolutions(FVAsols,model,rxnList,PltDim,FVAsols_enz,clr)
 % OUTPUTS:
 %   N/A
 % 
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 if ~exist('clr','var')

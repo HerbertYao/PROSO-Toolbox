@@ -5,7 +5,7 @@ function seq = findProteinSeq(geneID, fasta, defaultLen)
 % 
 % USAGE:
 %   
-%   seq = findProteinSeq('b0001', ecoli_fasta, 200)
+%   seq = findProteinSeq(geneID, fasta, defaultLen)
 % 
 % INPUTS:
 %   geneID:     Query gene id to find in the fasta header
@@ -14,8 +14,12 @@ function seq = findProteinSeq(geneID, fasta, defaultLen)
 % 
 % OUTPUTS:
 %   seq: Returned query sequence
+% 
+% EXAMPLE:
+% 
+%   seq = findProteinSeq('b0001', ecoli_fasta, 200)
 %  
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 found = false;

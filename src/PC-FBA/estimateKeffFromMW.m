@@ -5,7 +5,7 @@ function K_matrix_new = estimateKeffFromMW(C_matrix,K_matrix,proteinMW)
 % 
 % USAGE:
 % 
-%   K_matrix_adj = estimateKeffFromMW(C_matrix,K_matrix,proteinMW);
+%   K_matrix_new = estimateKeffFromMW(C_matrix,K_matrix,proteinMW)
 % 
 % INPUTS:
 %   C_matrix:  Matrix denotes stoich relationship between protein and cplx
@@ -15,7 +15,7 @@ function K_matrix_new = estimateKeffFromMW(C_matrix,K_matrix,proteinMW)
 % OUTPUTS:
 %   K_matrix_new: Newly estimated K_matrix
 %  
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 % Record the original Keff

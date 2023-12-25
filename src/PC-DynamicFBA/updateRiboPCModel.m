@@ -4,7 +4,7 @@ function model_ribo_new = updateRiboPCModel(model_ribo,FBAsol)
 % 
 % USAGE:
 % 
-%   model_ribo = updateRiboPCModel(model_ribo,FBAsol);
+%   model_ribo_new = updateRiboPCModel(model_ribo,FBAsol);
 % 
 % INPUTS:
 %   model_ribo: A ribosomal PC-model from formulateRibosomalPCModel.m
@@ -14,7 +14,7 @@ function model_ribo_new = updateRiboPCModel(model_ribo,FBAsol)
 % OUTPUTS:
 %   model_ribo_new: The updated ribosomal PC-model
 %  
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 proteinExIdx = find(startsWith(model_ribo.rxns,'EX_protein_'));

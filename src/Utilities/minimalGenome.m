@@ -6,19 +6,23 @@ function [model_min,KOList] = minimalGenome(model,optPerc,protectList)
 % 
 % USAGE:
 % 
-%   model_min = minimalGenome(model_pc,0.5);
+%   [model_min,KOList] = minimalGenome(model,optPerc,protectList)
 % 
 % INPUTS:
-% 
 %   model:       A PC-model produced by function pcModel.m or preferably
 %                refined by adjustStoichAndKeff.m
 %   optPerc:     The fraction of wildtype growth rate retained
 %   protectList: List of proteins mets that are protected from deletion
 % 
 % OUTPUTS:
-% 
 %   model_min: New PC-model with as many protein shutdown as possible
 %   KOList: The list of shutted down proteins
+% 
+% EXAMPLE:
+% 
+%   model_min = minimalGenome(model_pc,0.5);
+% 
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 model_min = model; % Keep the original model

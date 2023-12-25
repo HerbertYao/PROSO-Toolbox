@@ -8,7 +8,7 @@ function [MOPAsol,FBAsol_wt,FBAsol_mut] = MOPA(model,KOGene)
 % 
 % USAGE:
 % 
-%   MOPAsol = MOPA(model_pc,{'EX_protein_s0001','EX_protein_s0002'});
+%   [MOPAsol,FBAsol_wt,FBAsol_mut] = MOPA(model,KOGene)
 % 
 % INPUTS:
 %   model:    A PC-model formulated by function pcModel.m
@@ -20,7 +20,7 @@ function [MOPAsol,FBAsol_wt,FBAsol_mut] = MOPA(model,KOGene)
 %   FBAsol_wt:  Wildtype optimal solution
 %   FBAsol_mut: Mutant strain optimal solution
 % 
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 % Obj: min (0.5*p'Ip - p_ori*p)

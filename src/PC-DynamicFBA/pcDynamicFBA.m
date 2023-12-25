@@ -13,7 +13,8 @@ function [dFBAsol,substrateProfile,biomassProfile]...
 % 
 % USAGE:
 % 
-%   dFBAsol = pcDynamicFBA(model,timeInt,bmIdx,initBM,substrateList,substrateConc,riboBudget,FBAsol_ino);
+%   [dFBAsol,substrateProfile,biomassProfile]
+%   = pcDynamicFBA(model,timeInt,bmIdx,initBM,substrateList,substrateConc,riboBudget,FBAsol_ino)
 % 
 % INPUTS:
 %   model:          A PC-model produced by function pcModel.m or preferably
@@ -46,7 +47,7 @@ function [dFBAsol,substrateProfile,biomassProfile]...
 %   biomassProfile:   Biomass as a function of time
 %                     [1 x length(timeInt)]
 %  
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 %% Step 0: Checking inputs

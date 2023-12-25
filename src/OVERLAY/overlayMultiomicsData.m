@@ -7,8 +7,7 @@ function [QPsol,model_qp] = overlayMultiomicsData(varargin)
 % 
 % USAGE:
 % 
-%   QPsol_cv = overlayMultiomicsData(model_pc,data(:,1),0,{'protein_b0001'});
-%   QPsol_ncv = overlayMultiomicsData(model_pc,data,0,{'protein_b0001'},'keffEstimate',true);
+%   [QPsol,model_qp] = overlayMultiomicsData(model, data, varargin)
 % 
 % INPUTS:
 %   model:    A PC-model produced by function pcModel.m or preferably
@@ -49,7 +48,7 @@ function [QPsol,model_qp] = overlayMultiomicsData(varargin)
 %   This is the core function for OVERLAY, both convex (default) and
 %   non-convex (set "keffEstimate" to true). 
 % 
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 %% Parser

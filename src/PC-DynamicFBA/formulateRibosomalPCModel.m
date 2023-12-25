@@ -8,7 +8,7 @@ function model_ribo = formulateRibosomalPCModel(model,RibosomeBudget)
 % 
 % USAGE:
 % 
-%   model_ribo = formulateRibosomalPCModel(model_pc,10);
+%   model_ribo = formulateRibosomalPCModel(model,RibosomeBudget)
 % 
 % INPUTS: 
 %   model:          A PC-model formulated by function pcModel.m
@@ -21,7 +21,7 @@ function model_ribo = formulateRibosomalPCModel(model,RibosomeBudget)
 %               and modified mets and rxns of ribosomal PC-model are shown 
 %               below. 
 %  
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 % Format for ribosomal PC-model:

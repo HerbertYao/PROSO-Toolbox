@@ -8,12 +8,9 @@ function [model_new,openRxnList] = tryCloseRxns(model,rxnList,closeDir,mu_min)
 % 
 % USAGE:
 % 
-%   allExRxns = model_ori.rxns(find(startsWith(model_ori.rxns,'EX_')));
-%   closeDir = -1 * ones(1,length(allExRxns));
-%   model_new = tryCloseRxns(model_ori,allExRxns,closeDir,0.2);
+%   [model_new,openRxnList] = tryCloseRxns(model,rxnList,closeDir,mu_min)
 % 
-% INPUTS:
-% 
+% INPUTS: 
 %   model:    An M-model or PC-model produced by function pcModel.m
 %   rxnList:  The list of rxn to be closed
 %   closeDir: Which way is each rxn in rxnList is shutting down. For
@@ -24,9 +21,16 @@ function [model_new,openRxnList] = tryCloseRxns(model,rxnList,closeDir,mu_min)
 %   mu_min:   The minimal objective flux
 % 
 % OUTPUTS:
-% 
 %   model_new:   The model with closed rxns lb or ub changed to 0
 %   openRxnList: The list of rxns from rxnList that is left open
+% 
+% EXAMPLE:
+% 
+%   allExRxns = model_ori.rxns(find(startsWith(model_ori.rxns,'EX_')));
+%   closeDir = -1 * ones(1,length(allExRxns));
+%   model_new = tryCloseRxns(model_ori,allExRxns,closeDir,0.2);
+% 
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 model_milp = model;

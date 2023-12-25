@@ -8,7 +8,7 @@ function FBAsols = proteinTween(model,FBAsol_init,objRxn,nSteps)
 % 
 % USAGE:
 % 
-%   FBAsols = proteinTween(model_pc,FBAsol_old,'BIOMASS_SC5_notrace',20);
+%   FBAsols = proteinTween(model,FBAsol_init,objRxn,nSteps)
 % 
 % INPUTS:
 %   model:       A PC-model formulated by function pcModel.m
@@ -23,7 +23,7 @@ function FBAsols = proteinTween(model,FBAsol_init,objRxn,nSteps)
 % OUTPUTS:
 %   FBAsols: A matrix with every ribosomal PC-FBA solutions. 
 % 
-% .. AUTHOR: Herbert Yao, Dec 2023
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 model_ori = model;
