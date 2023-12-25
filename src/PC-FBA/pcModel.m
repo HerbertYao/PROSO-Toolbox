@@ -9,7 +9,6 @@ function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM
 %   new_model = proteinConstraintModel(model,'Paeruginosa.fasta',150);
 % 
 % INPUTS:
-% 
 %   model: A functional COBRA model struct with the field 'genes'
 %   fasta: The file name of a proteome fasta file containing geneID 
 %          (same set of ID as model.genes) as header and respective protein 
@@ -19,12 +18,10 @@ function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM
 %          fasta. The modelling accuracy will be compromised.
 % 
 % OPTIONAL INPUTS:
-% 
 %   maxWeightFrac: A double denotes the maximum weight fraction of total
 %                  protein components, in mg/gDW. Default = 150mg/gDW
 % 
 % OUTPUTS:
-% 
 %   constraintedModel: A m-model with proteomic constraint
 %   fullProtein:       A full list of proteins added to model.mets
 %   fullEnzyme:        A full list of enzymes added to model.mets
@@ -37,7 +34,7 @@ function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM
 %   MATLAB with Bioinformatics and Deep Learning Toolbox installed
 %   Configured CobraToolbox with at least one capable solver
 % 
-% Important Note:
+% NOTES:
 % 
 %   New_model.mets will contain all proteins and enzymes (protein
 %   complexes). Each protein and enzyme will have an exchange rxn and a
@@ -45,6 +42,9 @@ function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM
 %   representing their concentration in nmol/gDW. Therefore, the
 %   concentration of protein_i is -v_{EX_protein_i} and the concentration 
 %   of enzyme_j is v_{EX_enzyme_j} = v_{enzymeForm_enzyme_j}
+%  
+% .. AUTHOR: Herbert Yao, Dec 2023
+% 
 
 % -------------------------------------------------------------------------
 %% Step 0: Parse Inputs

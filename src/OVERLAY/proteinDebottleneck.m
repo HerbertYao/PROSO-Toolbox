@@ -2,6 +2,25 @@ function [FBAsol,model_new,relaxProt,relaxLevel] = proteinDebottleneck(model,ptB
 
 % return a FBA solution with protein lb relief slightly to optimize the
 % objective function.
+% 
+% USAGE:
+% 
+%   [FBAsol_db, model_db] = proteinDebottleneck(model_pc, 30)
+% 
+% INPUTS:
+%   model:    A PC model built from the function 'pcModel.m' with
+%             context-specific protein level implemented by
+%             implementProteinConstraints.m
+%   ptBudget: The protein relaxation budget in nmol/gDW 
+% 
+% OUTPUTS:
+%   FBAsol:     The optimal FBAsol for the given PC-model and ptBudget
+%   model_new:  The new context-specific PC model with relaxation
+%   relaxProt:  All relaxed proteins in cell array
+%   relaxLevel: The level of protein relaxations in double
+% 
+% .. AUTHOR: Herbert Yao, Dec 2023
+% 
 
 model_new = model;
 % add a new protein budget

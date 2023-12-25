@@ -8,19 +8,18 @@ function FVAsols = contextSpecificPCFVA(models_db,rxnList,optPerc,printBool)
 %   FVAsols = contextSpecificPCFVA(models_db,rxnList,[0,0.5,0.9,0.95]);
 % 
 % INPUTS:
-% 
 %   models_db: M*1 cell contains context-specific PC-model
 %   rxnList:   N*1 cell array with rxn IDs for FVA
 % 
 % OPTIONAL INPUTS:
-% 
 %   optPerc: K*1 vector for objective flux optimal percentages. 
 %            Default: [0,0.5,0.9]
 %   printBool: if the coarse progress is printed in console.
 % 
 % OUTPUTS:
-% 
 %   FVAsols: N * M * 2K matrix as FVA results. 
+% 
+% .. AUTHOR: Herbert Yao, Dec 2023
 % 
 
 if ~exist('optPerc','var')

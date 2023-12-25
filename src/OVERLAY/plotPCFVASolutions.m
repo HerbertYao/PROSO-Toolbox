@@ -8,14 +8,12 @@ function plotPCFVASolutions(FVAsols,model,rxnList,PltDim,FVAsols_enz,clr)
 %       [1,2],FVAsols_enz)
 % 
 % INPUTS:
-% 
 %   FVAsols: 3d matrix as an output from contextSpecificPCFVA.m
 %   model:   Unmodified M-model struct or PC-model struct
 %   rxnList: List of metabolic rxns to be plotted
 %   PltDim:  The dimension of subplots
 % 
 % OPTIONAL INPUTS:
-% 
 %   FVAsols_enz: FVA solution of reaction-specific enzyme level. This will
 %                be plotted as black lines. Please consult the tutorial
 %                about its format. Default = []
@@ -23,8 +21,9 @@ function plotPCFVASolutions(FVAsols,model,rxnList,PltDim,FVAsols_enz,clr)
 %                cell with each entry containing a color. It has a default.
 % 
 % OUTPUTS:
-% 
 %   N/A
+% 
+% .. AUTHOR: Herbert Yao, Dec 2023
 % 
 
 if ~exist('clr','var')

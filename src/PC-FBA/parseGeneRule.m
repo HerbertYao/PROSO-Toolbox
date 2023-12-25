@@ -1,6 +1,29 @@
 function enzymeString = parseGeneRule(ruleString)
 
-% This function parse model.rules{i} into a array of all possible enzymes
+% This function parse model.rules{i} into a array of all logical
+% combinations of genes, each cluster separated by ";". This is a very
+% important function in PC-model implementation. 
+% 
+% USAGE:
+%   
+%   enzymeString = parseGeneRule('(((x(105)&x(107))&x(103))|(x(105)&x(107))|(x(105)&x(102))|(x(104)&x(106)))')
+% 
+% INPUTS:
+%   ruleString: The string from model.rules{i}
+% 
+% OUTPUTS:
+%   enzymeString: Output string formatted 
+% 
+% NOTE:
+% 
+%   This function is capable of handling various modes of rule annotations.
+%   However, mis-annotation of brackets (especially missing left brackets)
+%   tends to make this function throw error. The user may need to manually
+%   fix certain entries in model.rules and please always check if rules are
+%   parsed correctly after using. 
+%  
+% .. AUTHOR: Herbert Yao, Dec 2023
+% 
 
 ruleString = erase(ruleString,' '); % Remove all spaces
 enzymeString = ''; % Initialize the return string

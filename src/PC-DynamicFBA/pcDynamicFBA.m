@@ -16,7 +16,6 @@ function [dFBAsol,substrateProfile,biomassProfile]...
 %   dFBAsol = pcDynamicFBA(model,timeInt,bmIdx,initBM,substrateList,substrateConc,riboBudget,FBAsol_ino);
 % 
 % INPUTS:
-% 
 %   model:          A PC-model produced by function pcModel.m or preferably
 %                   refined by adjustStoichAndKeff.m. All required exchange
 %                   bounds need to be setup properly (including those in
@@ -31,7 +30,6 @@ function [dFBAsol,substrateProfile,biomassProfile]...
 %                   substrateList
 % 
 % OPTIONAL INPUPTS:
-%   
 %   model_ino: model used to simulate protein allocation at t = 0. Must be
 %              the same model as the first input, but may with different 
 %              lb and ub (to similate start-up lag phase)
@@ -41,13 +39,14 @@ function [dFBAsol,substrateProfile,biomassProfile]...
 %   Vmax:           Maximum translation speed for each ribosome
 % 
 % OUTPUTS:
-% 
 %   dFBAsol:          Model solution as a function of time
 %                     [length(model.rxns) x length(timeInt)]
 %   substrateProfile: Substrates concentration as a function of time
 %                     [length(substrateList) x length(timeInt)]
 %   biomassProfile:   Biomass as a function of time
 %                     [1 x length(timeInt)]
+%  
+% .. AUTHOR: Herbert Yao, Dec 2023
 % 
 
 %% Step 0: Checking inputs

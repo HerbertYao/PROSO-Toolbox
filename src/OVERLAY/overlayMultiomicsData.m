@@ -1,29 +1,29 @@
-function [FBAsol,model_fit] = overlayMultiomicsData(varargin)
+function [QPsol,model_qp] = overlayMultiomicsData(varargin)
 
-% Finds a sol which fits a given transcriptome as closely as possible. 
-% Reaction constraints have to be set up prior to using this function (such
-% as minimal growth rate or production).
+% Finds a PC-FBAsol which fits a given transcriptome as closely as possible
+% by minimizing the sum of squared error. Reaction constraints have to be 
+% set up prior to using this function (such as minimal growth rate or 
+% production).
 % 
 % USAGE:
 % 
-%   FBAsol = overlayMultiomicsData(model_pc,count,5,[0.1,1000]);
+%   QPsol_cv = overlayMultiomicsData(model_pc,data(:,1),0,{'protein_b0001'});
+%   QPsol_ncv = overlayMultiomicsData(model_pc,data,0,{'protein_b0001'},'keffEstimate',true);
 % 
 % INPUTS:
-% 
 %   model:    A PC-model produced by function pcModel.m or preferably
 %             refined by adjustStoichAndKeff.m
 %   data:     Transcriptome or proteome data in M*N matrix
 %               M = length of protein vector
 %               N = number of sets of data. N~=1 is only allowed when
 %                   keffEstimate = true
-%   thres:    Lower threshold for an abundance count to be considered
-%             relevant. Default = 0
-%   waiver:   A cell array contains proteinMets that needs to be waivered
-%             from fitting. Default = {}
-%             i.e., {'protein_b0001','protein_b0002'}.
 % 
-% OPTIONAL INPUTS (as parameter value pairs):
-% 
+% OPTIONAL INPUTS:
+%   thres:        Lower threshold for an abundance count to be considered
+%                 relevant. Default = 0
+%   waiver:       A cell array contains proteinMets that needs to be 
+%                 waivered from fitting. Default = {}
+%                 i.e., {'protein_b0001','protein_b0002'}.
 %   keffEstimate: If enzymatic rate constants are treated as variables.
 %                 Setting to true will lead to nonconvex QP, which Gurobi 
 %                 solver must be installed. Default = false
@@ -42,8 +42,14 @@ function [FBAsol,model_fit] = overlayMultiomicsData(varargin)
 %                 number of reactions. Only works when keffEstimate = true
 % 
 % OUTPUTS:
+%   FBAsol:    FBAsol structure of best possible transcriptome fitting
+%   model_fit: The model formulated before calling the solver
 % 
-%   FBAsol: FBA solution structure of best possible transcriptome fitting
+% NOTE:
+%   This is the core function for OVERLAY, both convex (default) and
+%   non-convex (set "keffEstimate" to true). 
+% 
+% .. AUTHOR: Herbert Yao, Dec 2023
 % 
 
 %% Parser
@@ -81,19 +87,23 @@ if ~variableKeff
     qp.F = zeros(length(model.c),length(model.c));
     
     % Set qp.c and qp.F
+
     proteinExIdx = find(contains(model.rxns,'EX_protein_'));
     
-    % length of data must equal to length of proteinExIdx, else return error
+    % length of data must equal to length of proteinExIdx, else throw error
+
     if length(proteinExIdx) ~= length(data)
         error('Length of data must equal to the number of exchanged proteins in the model');
     end
 
     % prepare objective weight
+
     if isempty(objWeight)
         objWeight = ones(length(proteinExIdx),1);
     end
 
     % Rescale data so it sums to protein budget
+
     bgt = model.b(find(strcmp(model.mets,'proteinWC'))); % total proteome mass budget (mg)
     mw = -model.S(find(strcmp(model.mets,'proteinWC')),proteinExIdx); % protein MW vector (mg/nmol protein)
     sc = bgt / (mw * data);
@@ -102,12 +112,14 @@ if ~variableKeff
     for i = 1:length(proteinExIdx)
         
     %   Waiver
+
         protName = erase(model.rxns{proteinExIdx(i)},'EX_');
         if any(strcmp(waiver,protName))
             continue;
         end
         
     %   Assigning both linear and quadratic objectives
+
         if data(i) > thres
             qp.c(proteinExIdx(i)) = data(i) * objWeight(i);
             qp.F(proteinExIdx(i),proteinExIdx(i)) = objWeight(i);
@@ -115,14 +127,16 @@ if ~variableKeff
     end
     
     % Solve and prepare the return
-    FBAsol = solveCobraQP(qp);
-    model_fit = qp;
+
+    QPsol = solveCobraQP(qp);
+    model_qp = qp;
 
 else
 %% Make enzymatic rate constants variable: nonconvex bilinear optimization
 %   Gurobi must be installed correctly and on path
 
 %   Prepare
+
     proteinExIdx = find(startsWith(model.rxns,'EX_protein_'));
     fullProteinIdx = find(startsWith(model.mets,'protein_'));
     fullCplxIdx = find(startsWith(model.mets,'cplx_'));
@@ -130,6 +144,7 @@ else
     cplxFormIdx = find(startsWith(model.rxns,'cplxForm_'));
 
 %   Rescale all data sets
+
     bgt = model.b(find(strcmp(model.mets,'proteinWC')));
     mw = -model.S(find(strcmp(model.mets,'proteinWC')),proteinExIdx);
 
@@ -317,8 +332,8 @@ else
     params.NonConvex = 2;
     params.PoolGap = 0.05;
     model_bp.modelsense = 'min';
-    model_fit = model_bp;
+    model_qp = model_bp;
     model_bp = rmfield(model_bp,{'varnames','constrnames'});
-    FBAsol = gurobi(model_bp,params);
+    QPsol = gurobi(model_bp,params);
     
 end

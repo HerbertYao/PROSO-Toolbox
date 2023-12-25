@@ -2,6 +2,19 @@ function MM = calcProteinMM(seq)
 
 % The function returns the molar mass of a given protein sequence. 
 % The sequence must be in one-letter symbols. The return unit is g/mol.
+% 
+% USAGE:
+%   
+%   MM_b0001 = calcProteinMM('MKRISTTITTTITITTGNGAG')
+% 
+% INPUTS:
+%   seq: Protein sequence
+% 
+% OUTPUTS:
+%   MM: Molar weight of the protein in g/mol
+%  
+% .. AUTHOR: Herbert Yao, Dec 2023
+% 
 
 MM = 0;
 seqList = num2cell(seq);

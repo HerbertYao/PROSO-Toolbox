@@ -109,9 +109,9 @@ fprintf('========== PC-OptKnock ==========\n');
 inputs.ok_target = 46;
 
 [model_ok,param] = formulatePCOptKnock(model_pc_ori,1,0.05);
-model_ok.obj(inputs.ok_target) = 1;
 model_ok = changeNumKO(model_ok,3);
-OKsol = gurobi(model_ok,param);
+model_ok.c(inputs.ok_target) = 1;
+OKsol = solveCobraMILP(model_ok,param);
 
 outputs.OKsol = OKsol;
 

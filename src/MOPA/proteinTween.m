@@ -11,7 +11,6 @@ function FBAsols = proteinTween(model,FBAsol_init,objRxn,nSteps)
 %   FBAsols = proteinTween(model_pc,FBAsol_old,'BIOMASS_SC5_notrace',20);
 % 
 % INPUTS:
-% 
 %   model:       A PC-model formulated by function pcModel.m
 %   FBAsol_init: The solution representing the current cell proteomic +
 %                metabolic state. This can be a result from OVERLAY, MOPA,
@@ -22,8 +21,9 @@ function FBAsols = proteinTween(model,FBAsol_init,objRxn,nSteps)
 %                optimum. 
 % 
 % OUTPUTS:
-% 
 %   FBAsols: A matrix with every ribosomal PC-FBA solutions. 
+% 
+% .. AUTHOR: Herbert Yao, Dec 2023
 % 
 
 model_ori = model;

@@ -37,7 +37,7 @@ model_ori = readCbModel('e_coli_core.xml');
 load([testPath, '/testData_testOfPROSO.mat']);
 
 for k = 1:length(solversPkgs.LP)
-    fprintf(' -- Running <testFile> using the solver interface: %s ... ', solversPkgs.LP{k});
+    fprintf(' -- Running testOfPROSO using the solver interface: %s ... ', solversPkgs.LP{k});
 
     solverLPOK = changeCobraSolver(solversPkgs.LP{k}, 'all', 0);
 
@@ -51,10 +51,14 @@ for k = 1:length(solversPkgs.LP)
         end
 
         % Non-convex QP
-        [QPsol,model_qp] = overlayMultiomicsData(inputs.model_pc_ori,inputs.data,0,inputs.waiver,'keffEstimate',true);
-        rValues = QPsol.x(find(startsWith(model_qp.varnames,'R_')));
-        if abs(outputs.rValues(1) - rValues(1)) > tol
-            warning('Non-convex QP solution exceeds tol');
+        if strcmp(solversPkgs.LP{k},'gurobi') % only proceed for gurobi
+            [QPsol,model_qp] = overlayMultiomicsData(inputs.model_pc_ori,inputs.data,0,inputs.waiver,'keffEstimate',true);
+            rValues = QPsol.x(find(startsWith(model_qp.varnames,'R_')));
+            if abs(outputs.rValues(1) - rValues(1)) > tol
+                warning('Non-convex QP solution exceeds tol');
+            end
+        else
+            warning('Non-convex QP not tested for solver: %s', solversPkgs.LP{k});
         end
 
         % Convex QP
@@ -77,10 +81,10 @@ for k = 1:length(solversPkgs.LP)
 
         % Test PC-OptKnock
         [model_ok,param] = formulatePCOptKnock(inputs.model_pc_ori,1,0.05);
-        model_ok.obj(inputs.ok_target) = 1;
         model_ok = changeNumKO(model_ok,3);
-        OKsol = gurobi(model_ok,param);
-        if abs(outputs.OKsol.objval - OKsol.objval) > tol
+        model_ok.c(inputs.ok_target) = 1;
+        OKsol = solveCobraMILP(model_ok,param);
+        if abs(outputs.OKsol.obj - OKsol.obj) > tol
             warning('PC-OptKnock solution exceeds tol');
         end
 

@@ -7,7 +7,6 @@ function model_adj = adjustStoichAndKeff(model,C_matrix,K_matrix)
 %   model_adj = adjustStoichAndKeff(model,C_matrix,K_matrix);
 % 
 % INPUTS:
-% 
 %   model:    A PC model built from the function 'pcModel.m'
 %   C_matrix: Denotes stoich relationship between protein and cplx, must be
 %             the same dimension as C_matrix output from 'pcModel.m'
@@ -15,8 +14,9 @@ function model_adj = adjustStoichAndKeff(model,C_matrix,K_matrix)
 %             same demension as K_matrix output from 'pcModel.m'
 % 
 % OUTPUTS:
-% 
 %   model_adj: The adjusted PC model
+% 
+% .. AUTHOR: Herbert Yao, Dec 2023
 % 
 
 % Checking input format

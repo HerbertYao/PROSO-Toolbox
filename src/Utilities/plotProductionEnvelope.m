@@ -4,11 +4,10 @@ function [v1,v2] = plotProductionEnvelope(models,rxnId1,rxnId2,NSteps,plotFlag,l
 % 
 % USAGE:
 % 
-%   plotProductionEnvelope(model_pc,'BIOMASS_SC5_notrace','EX_succ_e',20,true);
-%   plotProductionEnvelope(models,'BIOMASS_SC5_notrace','EX_succ_e',20,true);
+%   plotProductionEnvelope(models,rxnId1,rxnId2,NSteps,plotFlag)
+%   plotProductionEnvelope(models,rxnId1,rxnId2,NSteps,plotFlag,lgd)
 % 
 % INPUTS:
-% 
 %   models:   A PC-model formulated by function pcModel.m
 %   rxnId1:   The first rxn of interests
 %   rxnId2:   The second rxn of interests
@@ -19,7 +18,6 @@ function [v1,v2] = plotProductionEnvelope(models,rxnId1,rxnId2,NSteps,plotFlag,l
 %   rxnWgt2:  % TODO %
 % 
 % OUTPUTS:
-% 
 %   v1: Flux vector for rxnId1
 %   v2: Flux vector for rxnId2
 % 

@@ -101,7 +101,7 @@ end
 % (PCBool = false). 
 
 if ~exist('model_ok','var')
-    [model_ok,param] = formulatePCOptKnock(model_ori,1,0.05,false);
+    [model_ok,param] = formulatePCOptKnock(model_ori,1,0.05,false,true);
 end
 
 % Let's inspect the MILP model's structure:
@@ -128,7 +128,7 @@ end
 
 if ~exist('OKsol','var')
     model_ok.obj(rxnIdx.EX_succ) = 1;
-    model_ok = changeNumKO(model_ok,1);
+    model_ok = changeNumKO(model_ok,1,true);
     OKsol = gurobi(model_ok,param);
 end
 
@@ -152,7 +152,7 @@ plotProductionEnvelope(model_test,model_ori.rxns{rxnIdx.biomass},model_ori.rxns{
 % MILP struct for the regular OptKnock. 
 
 if ~exist('model_pcok','var')
-    [model_pcok,param] = formulatePCOptKnock(model_pc_ori,1,0.05,true);
+    [model_pcok,param] = formulatePCOptKnock(model_pc_ori,1,0.05,true,true);
 end
 
 yIdx = find(startsWith(model_pcok.varnames,'y_')); % binary var index
@@ -164,7 +164,7 @@ models_sol = {};
 K_init = 1;
 
 model_pcok.obj(rxnIdx.EX_succ) = 1; % specify the outer objective
-model_pcok = changeNumKO(model_pcok,K_init); % set K
+model_pcok = changeNumKO(model_pcok,K_init,true); % set K
 PCOKsol = gurobi(model_pcok,param);
 
 % If we do get a growth-coupling solution (we should according to the
@@ -199,7 +199,7 @@ end
 % 
 % So let's do K = 1+1 here
 
-model_pcok_alt = changeNumKO(model_pcok,K_init+1);
+model_pcok_alt = changeNumKO(model_pcok,K_init+1,true);
 model_pcok_alt.ub(yIdx(idx)) = 0; % forcing the previous knockout
 PCOKsol = gurobi(model_pcok_alt,param);
 
@@ -215,7 +215,7 @@ plotProductionEnvelope(models_sol{2},model_pc_ori.rxns{rxnIdx.biomass},model_pc_
 
 % And then K = 1+1+1: 
 
-model_pcok_alt = changeNumKO(model_pcok,K_init+2);
+model_pcok_alt = changeNumKO(model_pcok,K_init+2,true);
 model_pcok_alt.ub(yIdx(idx)) = 0;
 PCOKsol = gurobi(model_pcok_alt,param);
 
@@ -231,7 +231,7 @@ plotProductionEnvelope(models_sol{3},model_pc_ori.rxns{rxnIdx.biomass},model_pc_
 
 % And then K = 1+1+1+1: 
 
-model_pcok_alt = changeNumKO(model_pcok,K_init+3);
+model_pcok_alt = changeNumKO(model_pcok,K_init+3,true);
 model_pcok_alt.ub(yIdx(idx)) = 0;
 PCOKsol = gurobi(model_pcok_alt,param);
 

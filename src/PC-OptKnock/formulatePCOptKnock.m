@@ -1,18 +1,19 @@
-function [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin,PCBool)
+function [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin,PCBool,forGRB)
 
 % Prepare MILP model structure for pcOptKnock
 % 
 % USAGE:
 % 
-%   [milp_pcok,param] = formulatePCOptKnock(model_pc,1,0.05,true);
-%   (alternatively, milp_ok = formulatePCOptKnock(model_m,1,0.05,false);)
+%   [pcOptKnockMILP,param] = formulatePCOptKnock(model)
+%   [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO)
+%   [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin)
+%   [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin,PCBool)
+%   [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin,PCBool,forGRB)
 % 
 % INPUTS:
-% 
 %   model:  A PC-model produced by function pcModel.m
 % 
-% OPTIONAL INPUTS:
-% 
+% OPTIONAL INPUTS: 
 %   numKO:  The maximum number of knocked out allowed. This can be later
 %           changed by changeNumKO. 
 %           Default: 1
@@ -22,11 +23,36 @@ function [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin,PCBool)
 %           struct instead of PC-OptKnock. If set to false, input model
 %           should also be the base M-model instead of PC-model. 
 %           Default: true
+%   forGRB: If the output format is specifically for Gurobi(). If false,
+%           the outputting format will be for solveCobraMILP()
+%           Default: false (LEGACY OPTION)
 % 
 % OUTPUTS:
-% 
-%   pcOptKnockMILP: MILP struct formulated for Gurobi optimizer
+%   pcOptKnockMILP: MILP struct formulated
 %   param:          Solver parameters that can be passed in to the solver
+% 
+% EXAMPLE:
+% 
+%   % If you have Gurobi optimizer (preferred)
+%   [model_ok,param] = formulatePCOptKnock(model_pc,1,0.05,true,true);
+%   model_ok.obj(targetRxnIdx) = 1;
+%   OKsol = gurobi(model_ok,param);
+%   % If you don't have Gurobi but can call solveCobraMILP
+%   [model_ok,param] = formulatePCOptKnock(model_pc,1,0.05,true,false);
+%   model_ok.obj(targetRxnIdx) = 1;
+%   OKsol = solveCobraMILP(model_ok,param)
+%   
+% NOTE:
+% 
+%   If you have access to Gurobi optimizer as the MILP solver, we suggest
+%   you to set "forGRB" to true, which output a model struct and param you
+%   can use to call gurobi directly (i.e., gurobi(pcOptKnockMILP,param)).
+%   The current version of COBRA Toolbox v3 does not seem to pass in solver
+%   param correctly into Gurobi and it's causing some problems. If you have
+%   other MILP solvers for COBRA, please ignore "forGRB" and call
+%   solveCobraMILP(pcOptKnockMILP,param)
+%  
+% .. AUTHOR: - Herbert Yao, Dec 2023
 % 
 
 %% Prepare original MILP from model
@@ -38,6 +64,9 @@ if ~exist('objMin','var')
 end
 if ~exist('PCBool','var')
     PCBool = true;
+end
+if ~exist('forGRB','var')
+    forGRB = false;
 end
 
 fprintf('Configuring MILP from model...');
@@ -326,8 +355,39 @@ if ~issparse(milp.A)
     milp.A = sparse(milp.A);
 end
 
-pcOptKnockMILP = milp;
-param.FeasibilityTol = 1e-9;
-param.IntFeasTol = 1e-9;
+% Prepare output
+
+if forGRB
+    pcOptKnockMILP = milp;
+    param.FeasibilityTol = 1e-9;
+    param.IntFeasTol = 1e-9;
+    param.OutputFlag = 0;
+else
+    pcOptKnockMILP.A = milp.A;
+    pcOptKnockMILP.b = milp.rhs;
+    pcOptKnockMILP.c = milp.obj;
+    pcOptKnockMILP.lb = milp.lb;
+    pcOptKnockMILP.ub = milp.ub;
+    pcOptKnockMILP.osense = -1;
+    pcOptKnockMILP.csense = milp.sense;
+    for i = 1:length(pcOptKnockMILP.csense)
+        switch pcOptKnockMILP.csense(i)
+            case '>'
+                pcOptKnockMILP.csense(i) = 'G';
+            case '='
+                pcOptKnockMILP.csense(i) = 'E';
+            case '<'
+                pcOptKnockMILP.csense(i) = 'L';
+            otherwise
+                error('Something is wrong');
+        end
+    end
+    pcOptKnockMILP.vartype = milp.vtype;
+    pcOptKnockMILP.varnames = milp.varnames;
+    pcOptKnockMILP.constrnames = milp.constrnames;
+
+    param.intTol = 1e-9;
+    param.feasTol = 1e-9;
+end
 
 end

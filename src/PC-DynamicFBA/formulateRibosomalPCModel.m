@@ -10,18 +10,18 @@ function model_ribo = formulateRibosomalPCModel(model,RibosomeBudget)
 % 
 %   model_ribo = formulateRibosomalPCModel(model_pc,10);
 % 
-% INPUTS:
-% 
+% INPUTS: 
 %   model:          A PC-model formulated by function pcModel.m
 %   RibosomeBudget: The total amount of protein adjustments allowed from
 %                   the existing solution, unit in nmol/gDW. 
 % 
-% OUTPUTS:
-% 
+% OUTPUTS: 
 %   model_ribo: The ribosomal PC-model struct. Note that this model need to
 %               be set by updateRiboPCModel.m before solving. The addtional
 %               and modified mets and rxns of ribosomal PC-model are shown 
 %               below. 
+%  
+% .. AUTHOR: Herbert Yao, Dec 2023
 % 
 
 % Format for ribosomal PC-model:
