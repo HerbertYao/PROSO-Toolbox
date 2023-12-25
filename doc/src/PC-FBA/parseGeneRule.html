@@ -4,7 +4,7 @@
 <head>
   <title>Description of parseGeneRule</title>
   <meta name="keywords" content="parseGeneRule">
-  <meta name="description" content="This function parse model.rules{i} into a array of all possible enzymes">
+  <meta name="description" content="This function parse model.rules{i} into a array of all logical">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,27 +21,53 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>This function parse model.rules{i} into a array of all possible enzymes</strong></div>
+<div class="box"><strong>This function parse model.rules{i} into a array of all logical</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function enzymeString = parseGeneRule(ruleString) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> This function parse model.rules{i} into a array of all possible enzymes</pre></div>
+<div class="fragment"><pre class="comment"> This function parse model.rules{i} into a array of all logical
+ combinations of genes, each cluster separated by &quot;;&quot;. This is a very
+ important function in PC-model implementation. 
+ 
+ USAGE:
+   
+   enzymeString = parseGeneRule(ruleString)
+ 
+ INPUTS:
+   ruleString: The string from model.rules{i}
+ 
+ OUTPUTS:
+   enzymeString: Output string formatted 
+ 
+ EXAMPLE:
+ 
+   enzymeString = parseGeneRule('(((x(105)&amp;x(107))&amp;x(103))|(x(105)&amp;x(107))|(x(105)&amp;x(102))|(x(104)&amp;x(106)))')
+ 
+ NOTE:
+ 
+   This function is capable of handling various modes of rule annotations.
+   However, mis-annotation of brackets (especially missing left brackets)
+   tends to make this function throw error. The user may need to manually
+   fix certain entries in model.rules and please always check if rules are
+   parsed correctly after using. 
+  
+ .. AUTHOR: - Herbert Yao, Dec 2023</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="parseGeneRule.html" class="code" title="function enzymeString = parseGeneRule(ruleString)">parseGeneRule</a>	This function parse model.rules{i} into a array of all possible enzymes</li></ul>
+<li><a href="parseGeneRule.html" class="code" title="function enzymeString = parseGeneRule(ruleString)">parseGeneRule</a>	This function parse model.rules{i} into a array of all logical</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="parseGeneRule.html" class="code" title="function enzymeString = parseGeneRule(ruleString)">parseGeneRule</a>	This function parse model.rules{i} into a array of all possible enzymes</li><li><a href="pcModel.html" class="code" title="function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM] = pcModel(model,fasta,maxWeightFrac)">pcModel</a>	(MAIN) Construct a PC-model from M-model</li></ul>
+<li><a href="parseGeneRule.html" class="code" title="function enzymeString = parseGeneRule(ruleString)">parseGeneRule</a>	This function parse model.rules{i} into a array of all logical</li><li><a href="pcModel.html" class="code" title="function [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM] = pcModel(model,fasta,maxWeightFrac)">pcModel</a>	(MAIN) Construct a PC-model from M-model</li></ul>
 <!-- crossreference -->
 
 
 
 
-<hr><address>Generated on Sun 10-Sep-2023 13:44:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 24-Dec-2023 21:51:47 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

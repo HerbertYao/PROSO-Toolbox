@@ -4,7 +4,7 @@
 <head>
   <title>Description of implementProteinConstraints</title>
   <meta name="keywords" content="implementProteinConstraints">
-  <meta name="description" content="This function implements QP solutions to a PC-model.">
+  <meta name="description" content="This function implements QP solutions to a PC-model. It produces a N*1">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,34 +21,34 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>This function implements QP solutions to a PC-model.</strong></div>
+<div class="box"><strong>This function implements QP solutions to a PC-model. It produces a N*1</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="box"><strong>function models = implementProteinConstraints(model,QPsols,waiverList,s) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> This function implements QP solutions to a PC-model.
- It produces a N*1 structure contains context-specific PC-models
+<div class="fragment"><pre class="comment"> This function implements QP solutions to a PC-model. It produces a N*1 
+ structure contains context-specific PC-models
  
  USAGE:
  
-   models = implementProteinConstraints(model_pc,QPsols,{'EX_protein_s0001'},0.03);
+   models = implementProteinConstraints(model,QPsols,waiverList)
+   models = implementProteinConstraints(model,QPsols,waiverList,s)
  
  INPUTS:
- 
    model:      A PC model built from the function 'pcModel.m'
    QPsols:     The QP solution matrix constructed from concatenating
                N number of convex QP solutions together. 
    waiverList: This waiverList should be the same as used for the QP. 
  
  OPTIONAL INPUTS:
- 
    s: Universal slack term for the protein constraint. Please check the 
       tutorial or the publication for more details. Default: 0.02
  
  OUTPUTS:
+   models: A N*1 struct containing context-specific PC-models 
  
-   models: A N*1 struct containing context-specific PC-models</pre></div>
+ .. AUTHOR: - Herbert Yao, Dec 2023</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -63,6 +63,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Sun 10-Sep-2023 13:44:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 24-Dec-2023 21:51:47 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

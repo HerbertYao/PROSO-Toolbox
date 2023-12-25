@@ -35,20 +35,20 @@
  
  USAGE:
  
-   model_ribo = formulateRibosomalPCModel(model_pc,10);
+   model_ribo = formulateRibosomalPCModel(model,RibosomeBudget)
  
- INPUTS:
- 
+ INPUTS: 
    model:          A PC-model formulated by function pcModel.m
    RibosomeBudget: The total amount of protein adjustments allowed from
                    the existing solution, unit in nmol/gDW. 
  
- OUTPUTS:
- 
+ OUTPUTS: 
    model_ribo: The ribosomal PC-model struct. Note that this model need to
                be set by updateRiboPCModel.m before solving. The addtional
                and modified mets and rxns of ribosomal PC-model are shown 
-               below.</pre></div>
+               below. 
+  
+ .. AUTHOR: - Herbert Yao, Dec 2023</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -63,6 +63,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Sun 10-Sep-2023 13:44:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 24-Dec-2023 21:51:47 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

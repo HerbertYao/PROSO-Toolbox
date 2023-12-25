@@ -4,7 +4,7 @@
 <head>
   <title>Description of overlayMultiomicsData</title>
   <meta name="keywords" content="overlayMultiomicsData">
-  <meta name="description" content="Finds a sol which fits a given transcriptome as closely as possible.">
+  <meta name="description" content="Finds a PC-FBAsol which fits a given transcriptome as closely as possible">
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
   <meta name="robots" content="index, follow">
@@ -21,36 +21,35 @@
 </h1>
 
 <h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>Finds a sol which fits a given transcriptome as closely as possible.</strong></div>
+<div class="box"><strong>Finds a PC-FBAsol which fits a given transcriptome as closely as possible</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function [FBAsol,model_fit] = overlayMultiomicsData(varargin) </strong></div>
+<div class="box"><strong>function [QPsol,model_qp] = overlayMultiomicsData(varargin) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="fragment"><pre class="comment"> Finds a sol which fits a given transcriptome as closely as possible. 
- Reaction constraints have to be set up prior to using this function (such
- as minimal growth rate or production).
+<div class="fragment"><pre class="comment"> Finds a PC-FBAsol which fits a given transcriptome as closely as possible
+ by minimizing the sum of squared error. Reaction constraints have to be 
+ set up prior to using this function (such as minimal growth rate or 
+ production).
  
  USAGE:
  
-   FBAsol = overlayMultiomicsData(model_pc,count,5,[0.1,1000]);
+   [QPsol,model_qp] = overlayMultiomicsData(model, data, varargin)
  
  INPUTS:
- 
    model:    A PC-model produced by function pcModel.m or preferably
              refined by adjustStoichAndKeff.m
    data:     Transcriptome or proteome data in M*N matrix
                M = length of protein vector
                N = number of sets of data. N~=1 is only allowed when
                    keffEstimate = true
-   thres:    Lower threshold for an abundance count to be considered
-             relevant. Default = 0
-   waiver:   A cell array contains proteinMets that needs to be waivered
-             from fitting. Default = {}
-             i.e., {'protein_b0001','protein_b0002'}.
  
- OPTIONAL INPUTS (as parameter value pairs):
- 
+ OPTIONAL INPUTS:
+   thres:        Lower threshold for an abundance count to be considered
+                 relevant. Default = 0
+   waiver:       A cell array contains proteinMets that needs to be 
+                 waivered from fitting. Default = {}
+                 i.e., {'protein_b0001','protein_b0002'}.
    keffEstimate: If enzymatic rate constants are treated as variables.
                  Setting to true will lead to nonconvex QP, which Gurobi 
                  solver must be installed. Default = false
@@ -69,8 +68,14 @@
                  number of reactions. Only works when keffEstimate = true
  
  OUTPUTS:
+   FBAsol:    FBAsol structure of best possible transcriptome fitting
+   model_fit: The model formulated before calling the solver
  
-   FBAsol: FBA solution structure of best possible transcriptome fitting</pre></div>
+ NOTE:
+   This is the core function for OVERLAY, both convex (default) and
+   non-convex (set &quot;keffEstimate&quot; to true). 
+ 
+ .. AUTHOR: - Herbert Yao, Dec 2023</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -85,6 +90,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Sun 10-Sep-2023 13:44:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 24-Dec-2023 21:51:47 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

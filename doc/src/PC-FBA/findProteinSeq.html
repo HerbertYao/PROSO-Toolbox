@@ -24,11 +24,29 @@
 <div class="box"><strong>The function returns a protein sequence from fasta file. If the ID is not</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function seq = findProteinSeq(geneID, fasta, avgLen) </strong></div>
+<div class="box"><strong>function seq = findProteinSeq(geneID, fasta, defaultLen) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment"> The function returns a protein sequence from fasta file. If the ID is not
- found, return an average-lengthed 'ZZZZZZZZ' seq</pre></div>
+ found, return an average-lengthed 'ZZZZZZZZ' seq
+ 
+ USAGE:
+   
+   seq = findProteinSeq(geneID, fasta, defaultLen)
+ 
+ INPUTS:
+   geneID:     Query gene id to find in the fasta header
+   fasta:      Protein fasta file in the form of N*1 struct
+   defaultLen: The default aa length if the query is not found
+ 
+ OUTPUTS:
+   seq: Returned query sequence
+ 
+ EXAMPLE:
+ 
+   seq = findProteinSeq('b0001', ecoli_fasta, 200)
+  
+ .. AUTHOR: - Herbert Yao, Dec 2023</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -43,6 +61,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Sun 10-Sep-2023 13:44:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 24-Dec-2023 21:51:47 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

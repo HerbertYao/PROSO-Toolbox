@@ -33,10 +33,10 @@
  
  USAGE:
  
-   new_model = proteinConstraintModel(model,'Paeruginosa.fasta',150);
+   [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM] = pcModel(model,fasta)
+   [constraintedModel,fullProtein,fullCplx,C_matrix,K_matrix,fullProteinMM] = pcModel(model,fasta,maxWeightFrac)
  
  INPUTS:
- 
    model: A functional COBRA model struct with the field 'genes'
    fasta: The file name of a proteome fasta file containing geneID 
           (same set of ID as model.genes) as header and respective protein 
@@ -46,12 +46,10 @@
           fasta. The modelling accuracy will be compromised.
  
  OPTIONAL INPUTS:
- 
    maxWeightFrac: A double denotes the maximum weight fraction of total
                   protein components, in mg/gDW. Default = 150mg/gDW
  
  OUTPUTS:
- 
    constraintedModel: A m-model with proteomic constraint
    fullProtein:       A full list of proteins added to model.mets
    fullEnzyme:        A full list of enzymes added to model.mets
@@ -64,20 +62,22 @@
    MATLAB with Bioinformatics and Deep Learning Toolbox installed
    Configured CobraToolbox with at least one capable solver
  
- Important Note:
+ NOTES:
  
    New_model.mets will contain all proteins and enzymes (protein
    complexes). Each protein and enzyme will have an exchange rxn and a
    enzyme formation rxn. Fluxes of these reactions are not real flux, but
    representing their concentration in nmol/gDW. Therefore, the
    concentration of protein_i is -v_{EX_protein_i} and the concentration 
-   of enzyme_j is v_{EX_enzyme_j} = v_{enzymeForm_enzyme_j}</pre></div>
+   of enzyme_j is v_{EX_enzyme_j} = v_{enzymeForm_enzyme_j}
+  
+ .. AUTHOR: - Herbert Yao, Dec 2023</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 This function calls:
 <ul style="list-style-image:url(../../matlabicon.gif)">
-<li><a href="calcProteinMM.html" class="code" title="function MM = calcProteinMM(seq)">calcProteinMM</a>	The function returns the molar mass of a given protein sequence.</li><li><a href="findProteinSeq.html" class="code" title="function seq = findProteinSeq(geneID, fasta, avgLen)">findProteinSeq</a>	The function returns a protein sequence from fasta file. If the ID is not</li><li><a href="parseGeneRule.html" class="code" title="function enzymeString = parseGeneRule(ruleString)">parseGeneRule</a>	This function parse model.rules{i} into a array of all possible enzymes</li></ul>
+<li><a href="calcProteinMM.html" class="code" title="function MM = calcProteinMM(seq)">calcProteinMM</a>	The function returns the molar mass of a given protein sequence.</li><li><a href="findProteinSeq.html" class="code" title="function seq = findProteinSeq(geneID, fasta, defaultLen)">findProteinSeq</a>	The function returns a protein sequence from fasta file. If the ID is not</li><li><a href="parseGeneRule.html" class="code" title="function enzymeString = parseGeneRule(ruleString)">parseGeneRule</a>	This function parse model.rules{i} into a array of all logical</li></ul>
 This function is called by:
 <ul style="list-style-image:url(../../matlabicon.gif)">
 </ul>
@@ -86,6 +86,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Sun 10-Sep-2023 13:44:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 24-Dec-2023 21:51:47 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

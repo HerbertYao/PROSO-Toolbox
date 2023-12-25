@@ -31,23 +31,23 @@
  
  USAGE:
    
-   rxnList = models_db.rxns(1:1577); % all metabolic rxns
-   FVAsols = contextSpecificPCFVA(models_db,rxnList,[0,0.5,0.9,0.95]);
+   FVAsols = contextSpecificPCFVA(models_db,rxnList)
+   FVAsols = contextSpecificPCFVA(models_db,rxnList,optPerc)
+   FVAsols = contextSpecificPCFVA(models_db,rxnList,optPerc,printBool)
  
  INPUTS:
- 
-   models_db: M*1 struct contains context-specific PC-model
+   models_db: M*1 cell contains context-specific PC-model
    rxnList:   N*1 cell array with rxn IDs for FVA
  
  OPTIONAL INPUTS:
- 
    optPerc: K*1 vector for objective flux optimal percentages. 
             Default: [0,0.5,0.9]
    printBool: if the coarse progress is printed in console.
  
  OUTPUTS:
+   FVAsols: N * M * 2K matrix as FVA results. 
  
-   FVAsols: N * M * 2K matrix as FVA results.</pre></div>
+ .. AUTHOR: - Herbert Yao, Dec 2023</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -62,6 +62,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Sun 10-Sep-2023 13:44:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 24-Dec-2023 21:51:47 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

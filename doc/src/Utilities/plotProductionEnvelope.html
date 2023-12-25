@@ -31,11 +31,10 @@
  
  USAGE:
  
-   plotProductionEnvelope(model_pc,'BIOMASS_SC5_notrace','EX_succ_e',20,true);
-   plotProductionEnvelope(models,'BIOMASS_SC5_notrace','EX_succ_e',20,true);
+   plotProductionEnvelope(models,rxnId1,rxnId2,NSteps,plotFlag)
+   plotProductionEnvelope(models,rxnId1,rxnId2,NSteps,plotFlag,lgd)
  
  INPUTS:
- 
    models:   A PC-model formulated by function pcModel.m
    rxnId1:   The first rxn of interests
    rxnId2:   The second rxn of interests
@@ -46,9 +45,10 @@
    rxnWgt2:  % TODO %
  
  OUTPUTS:
- 
    v1: Flux vector for rxnId1
-   v2: Flux vector for rxnId2</pre></div>
+   v2: Flux vector for rxnId2
+ 
+ .. AUTHOR: - Herbert Yao, Dec 2023</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -63,6 +63,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Sun 10-Sep-2023 13:44:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 24-Dec-2023 21:51:47 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

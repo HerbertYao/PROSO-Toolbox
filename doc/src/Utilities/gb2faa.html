@@ -31,25 +31,30 @@
  
  USAGE:
  
-   gb2faa('GCF_000005845.2_ASM584v2_genomic.gbff.tar',true,...
-       'GCF_000005845.2_ASM584v2');
+   faa = gb2faa(gbFileName)
+   faa = gb2faa(gbFileName,ifDropNoSeqGene)
+   faa = gb2faa(gbFileName,ifDropNoSeqGene,faaFileName)
+   
  
  INPUTS:
- 
    gbFileName: Genbank file name. May also include its path
  
- OPTIONAL INPUTS:
- 
+ OPTIONAL INPUTS: 
    ifDropNoSeqGene: if genes without sequence recorded are passed. This is
                     recommended because faa with empty seq may trigger
                     errors downstream. Default: true
    faaFileName:     Output faa file name. Faa file will not be created if
                     this is left blank
  
- OUTPUTS:
- 
+ OUTPUTS: 
    faa: faa output format in N*1 cell. Odd entries are gene headings
-   (attributes) starting with '&gt;', even entries are gene sequences.</pre></div>
+        (attributes) starting with '&gt;', even entries are gene sequences. 
+ 
+ EXAMPLE:
+ 
+   faa = gb2faa('GCF_000005845.2_ASM584v2_genomic.gbff.tar',true,'GCF_000005845.2_ASM584v2');
+ 
+ .. AUTHOR: - Herbert Yao, Dec 2023</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -64,6 +69,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Sun 10-Sep-2023 13:44:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 24-Dec-2023 21:51:47 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

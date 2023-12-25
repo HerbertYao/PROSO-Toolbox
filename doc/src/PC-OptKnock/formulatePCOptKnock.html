@@ -24,22 +24,23 @@
 <div class="box"><strong>Prepare MILP model structure for pcOptKnock</strong></div>
 
 <h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
-<div class="box"><strong>function [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin,PCBool) </strong></div>
+<div class="box"><strong>function [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin,PCBool,forGRB) </strong></div>
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment"> Prepare MILP model structure for pcOptKnock
  
  USAGE:
  
-   [milp_pcok,param] = formulatePCOptKnock(model_pc,1,0.05,true);
-   (alternatively, milp_ok = formulatePCOptKnock(model_m,1,0.05,false);)
+   [pcOptKnockMILP,param] = formulatePCOptKnock(model)
+   [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO)
+   [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin)
+   [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin,PCBool)
+   [pcOptKnockMILP,param] = formulatePCOptKnock(model,numKO,objMin,PCBool,forGRB)
  
  INPUTS:
- 
    model:  A PC-model produced by function pcModel.m
  
- OPTIONAL INPUTS:
- 
+ OPTIONAL INPUTS: 
    numKO:  The maximum number of knocked out allowed. This can be later
            changed by changeNumKO. 
            Default: 1
@@ -49,11 +50,36 @@
            struct instead of PC-OptKnock. If set to false, input model
            should also be the base M-model instead of PC-model. 
            Default: true
+   forGRB: If the output format is specifically for Gurobi(). If false,
+           the outputting format will be for solveCobraMILP()
+           Default: false (LEGACY OPTION)
  
  OUTPUTS:
+   pcOptKnockMILP: MILP struct formulated
+   param:          Solver parameters that can be passed in to the solver
  
-   pcOptKnockMILP: MILP struct formulated for Gurobi optimizer
-   param:          Solver parameters that can be passed in to the solver</pre></div>
+ EXAMPLE:
+ 
+   % If you have Gurobi optimizer (preferred)
+   [model_ok,param] = formulatePCOptKnock(model_pc,1,0.05,true,true);
+   model_ok.obj(targetRxnIdx) = 1;
+   OKsol = gurobi(model_ok,param);
+   % If you don't have Gurobi but can call solveCobraMILP
+   [model_ok,param] = formulatePCOptKnock(model_pc,1,0.05,true,false);
+   model_ok.obj(targetRxnIdx) = 1;
+   OKsol = solveCobraMILP(model_ok,param)
+   
+ NOTE:
+ 
+   If you have access to Gurobi optimizer as the MILP solver, we suggest
+   you to set &quot;forGRB&quot; to true, which output a model struct and param you
+   can use to call gurobi directly (i.e., gurobi(pcOptKnockMILP,param)).
+   The current version of COBRA Toolbox v3 does not seem to pass in solver
+   param correctly into Gurobi and it's causing some problems. If you have
+   other MILP solvers for COBRA, please ignore &quot;forGRB&quot; and call
+   solveCobraMILP(pcOptKnockMILP,param)
+  
+ .. AUTHOR: - Herbert Yao, Dec 2023</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -68,6 +94,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Sun 10-Sep-2023 13:44:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 24-Dec-2023 21:51:47 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>

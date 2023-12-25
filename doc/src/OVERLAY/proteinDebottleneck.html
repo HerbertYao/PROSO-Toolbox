@@ -28,7 +28,25 @@
 
 <h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
 <div class="fragment"><pre class="comment"> return a FBA solution with protein lb relief slightly to optimize the
- objective function.</pre></div>
+ objective function.
+ 
+ USAGE:
+ 
+   [FBAsol,model_new,relaxProt,relaxLevel] = proteinDebottleneck(model,ptBudget)
+ 
+ INPUTS:
+   model:    A PC model built from the function 'pcModel.m' with
+             context-specific protein level implemented by
+             implementProteinConstraints.m
+   ptBudget: The protein relaxation budget in nmol/gDW 
+ 
+ OUTPUTS:
+   FBAsol:     The optimal FBAsol for the given PC-model and ptBudget
+   model_new:  The new context-specific PC model with relaxation
+   relaxProt:  All relaxed proteins in cell array
+   relaxLevel: The level of protein relaxations in double
+ 
+ .. AUTHOR: - Herbert Yao, Dec 2023</pre></div>
 
 <!-- crossreference -->
 <h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
@@ -43,6 +61,6 @@ This function is called by:
 
 
 
-<hr><address>Generated on Sun 10-Sep-2023 13:44:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+<hr><address>Generated on Sun 24-Dec-2023 21:51:47 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
 </body>
 </html>
